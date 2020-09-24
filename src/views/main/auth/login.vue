@@ -1,7 +1,7 @@
 <template>
     <div class="wrapper d-flex">
             <div class="one">
-               <Aside />
+               <leftSide />
             </div>
             <div class="two p-5">
                     <div class="container-text">
@@ -38,10 +38,10 @@
 </template>
 
 <script>
-import Aside from './aside'
+import leftSide from './side'
 export default {
   components: {
-    Aside
+    leftSide
   },
   data () {
     return {
