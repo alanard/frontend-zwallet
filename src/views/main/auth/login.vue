@@ -1,18 +1,7 @@
 <template>
     <div class="wrapper d-flex">
             <div class="one">
-                <h5 class="color" style="margin-left:80px">Zwallet</h5>
-                <div class="img-wrapper">
-                    <img src="../../../assets/Group 57.svg">
-                </div>
-                <div class="text-container" style="margin-left:80px;">
-                    <h5 class="color mb-3">App that Covering Banking Needs.</h5>
-                    <p style="color: rgba(255, 255, 255, 0.8);">Zwallet is an application that focussing in banking needs for all users
-                        in the world. Always updated and always following world trends.
-                        5000+ users registered in Zwallet everyday with worldwide
-                        users coverage.
-                    </p>
-                </div>
+               <Aside />
             </div>
             <div class="two p-5">
                     <div class="container-text">
@@ -28,31 +17,32 @@
                     </p>
                     <form>
                         <div class="form-group">
-                            <i class="satu far fa-user fa-lg fa-fw" aria-hidden="true"></i>
-                            <input type="text" class="name" placeholder="Enter your name">
-                        </div>
-                        <div class="form-group">
                             <i class="satu far fa-envelope fa-lg fa-fw"></i>
                             <input type="email" placeholder="Enter your email">
                         </div>
                         <div class="form-group">
                             <div class="input-group">
                                 <i class="satu fa fa-lock fa-lg fa-fw" aria-hidden="true"></i>
-                                <input :type="type" placeholder="Create your password">
+                                <input :type="type" placeholder="Enter your password">
                                 <div class="input-group-append" style="margin-left:-40px">
                                     <div :class="{active:active}" @click="show"><i class="fa fa-eye"></i></div>
                                 </div>
                             </div>
+                            <p class="text-right my-3" style="width:80%"><router-link to="/forgot">Forgot password?</router-link></p>
                         </div>
-                        <button type="submit" class="btn">Sign Up</button>
+                        <button type="submit" class="btn">Login</button>
                     </form>
-                    <div style="width: 80%"><p class="text-center my-4">Already have an account?<router-link to="/login"><strong>Let's Login</strong></router-link></p></div>
+                    <div style="width: 80%"><p class="text-center my-4">Don't have an account?<router-link to="/register"><strong>Sign Up</strong></router-link></p></div>
             </div>
     </div>
 </template>
 
 <script>
+import Aside from './aside'
 export default {
+  components: {
+    Aside
+  },
   data () {
     return {
       type: 'password',
