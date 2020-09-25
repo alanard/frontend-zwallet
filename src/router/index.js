@@ -6,6 +6,7 @@ import Login from '../views/main/auth/login.vue'
 import forgotPassword from '../views/main/auth/forgot.vue'
 import Pin from '../views/main/auth/pin.vue'
 import Personal from '../views/main/profile/personal.vue'
+import ChangePw from '../views/main/profile/change-pw.vue'
 import Home from '../views/main/home/home.vue'
 
 Vue.use(VueRouter)
@@ -50,6 +51,11 @@ const routes = [
     path: '/profile/personal',
     name: 'Personal',
     component: Personal
+  },
+  {
+    path: '/profile/change',
+    name: 'ChangePw',
+    component: ChangePw
   }
 ]
 
