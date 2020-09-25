@@ -4,6 +4,8 @@ import Main from '../views/main/index.vue'
 import Register from '../views/main/auth/register.vue'
 import Login from '../views/main/auth/login.vue'
 import forgotPassword from '../views/main/auth/forgot.vue'
+import Pin from '../views/main/auth/pin.vue'
+import Personal from '../views/main/profile/personal.vue'
 
 Vue.use(VueRouter)
 
@@ -27,6 +29,16 @@ const routes = [
     path: '/forgot',
     name: 'forgotPassword',
     component: forgotPassword
+  },
+  {
+    path: '/pin',
+    name: 'Pin',
+    component: Pin
+  },
+  {
+    path: '/profile/personal',
+    name: 'Personal',
+    component: Personal
   }
 ]
 

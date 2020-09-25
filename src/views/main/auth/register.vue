@@ -44,7 +44,7 @@
                                 </div>
                             </div>
                         </div>
-                        <button type="submit" class="btn">Sign Up</button>
+                        <button type="submit" class="btn" @click.prevent="register">Sign Up</button>
                     </form>
                     <div style="width: 80%"><p class="text-center my-4">Already have an account?<router-link to="/login"><strong>Let's Login</strong></router-link></p></div>
             </div>
@@ -63,6 +63,9 @@ export default {
     show () {
       this.type = this.type === 'password' ? 'text' : 'password'
       this.active = !this.active
+    },
+    register () {
+      this.$router.push('/pin')
     }
   }
 }
