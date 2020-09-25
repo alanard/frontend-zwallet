@@ -37,7 +37,9 @@
       </div>
       <!-- ==================================== -->
       <!-- content item -->
-      <div class="col-md-8 content-item">Main</div>
+      <div class="col-md-8 content-item">
+        <router-view />
+      </div>
     </div>
     <!-- ============================================================================ -->
     <!-- Footer -->
