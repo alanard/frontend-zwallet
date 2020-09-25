@@ -6,6 +6,7 @@ import Login from '../views/main/auth/login.vue'
 import forgotPassword from '../views/main/auth/forgot.vue'
 import Pin from '../views/main/auth/pin.vue'
 import Personal from '../views/main/profile/personal.vue'
+import Home from '../views/main/home/home.vue'
 
 Vue.use(VueRouter)
 
@@ -14,6 +15,11 @@ const routes = [
     path: '/',
     name: 'Main',
     component: Main
+  },
+  {
+    path: '/home',
+    name: 'Home',
+    component: Home
   },
   {
     path: '/register',
