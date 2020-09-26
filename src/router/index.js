@@ -2,6 +2,7 @@ import Vue from 'vue'
 import VueRouter from 'vue-router'
 import Main from '../views/main/index.vue'
 import Home from '../views/main/home/home.vue'
+import Dashboard from '../views/main/home/dashboard/Dashboard.vue'
 
 Vue.use(VueRouter)
 
@@ -14,7 +15,13 @@ const routes = [
   {
     path: '/home',
     name: 'Home',
-    component: Home
+    component: Home,
+    children: [
+      {
+        path: 'dashboard',
+        component: Dashboard
+      }
+    ]
   }
 ]
 

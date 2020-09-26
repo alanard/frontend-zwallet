@@ -37,7 +37,7 @@
       </div>
       <!-- ==================================== -->
       <!-- content item -->
-      <div class="col-md-8 content-item">Main</div>
+      <div class="col-md-8 content-item"><router-view></router-view></div>
     </div>
     <!-- ============================================================================ -->
     <!-- Footer -->
@@ -119,7 +119,7 @@ export default {
 .content {
   /* border: 1px solid black; */
   margin: 40px auto;
-  width: 90%;
+  width: 95%;
 }
 
 /* aside Left */
@@ -129,7 +129,7 @@ export default {
 
   height: 100vh;
   background: #ffffff;
-  margin-left: 36px;
+  margin-left: 60px;
   box-shadow: 0px 4px 20px rgba(0, 0, 0, 0.05);
 }
 
@@ -160,9 +160,6 @@ export default {
   /* border: 1px solid black; */
   border-radius: 15px;
   height: 100vh;
-  background: #ffffff;
-  margin-left: 30px;
-  box-shadow: 0px 4px 20px rgba(0, 0, 0, 0.05);
 }
 
 /* ===================================================================== */

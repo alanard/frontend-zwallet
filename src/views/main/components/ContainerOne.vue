@@ -68,11 +68,17 @@ export default {
   width: 100px;
   font-size: 18px;
   font-weight: bold;
-  color: #ffffff;
+  color: #6379f4;
+  background: #ffffff;
 
   width: 120px;
   height: 48px;
   border-radius: 12px;
+}
+
+.container-one .navbar .join .login:hover {
+  color: #ffffff;
+  background: #6379f4;
 }
 
 .container-one .navbar .join .signup {
@@ -81,10 +87,16 @@ export default {
   font-size: 18px;
   font-weight: bold;
   color: #ffffff;
+  background: #6379f4;
 
   width: 120px;
   height: 48px;
   border-radius: 12px;
+}
+
+.container-one .navbar .join .signup:hover {
+  color: #6379f4;
+  background: #ffffff;
 }
 
 /* =============================================================================== */
