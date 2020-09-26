@@ -27,12 +27,15 @@
       <div class="col-md-3 aside-left">
         <div class="row">
           <div class="item">
-            <i class="fas fa-border-none"></i><span>Dashboard</span>
+            <i class="fas fa-border-none"></i
+            ><span @click="linkToDashboard">Dashboard</span>
           </div>
           <div class="item">
             <i class="fas fa-arrow-up"></i><span>Transfer</span>
           </div>
-          <div class="item"><i class="fas fa-plus"></i><span>Top Up</span></div>
+          <div class="item">
+            <i class="fas fa-plus"></i><span @click="linkToFaq">Top Up</span>
+          </div>
           <div class="item">
             <i class="far fa-user"></i><span>Profile</span>
           </div>
@@ -71,6 +74,12 @@ export default {
   methods: {
     ModalActive() {
       this.isShow = !this.isShow
+    },
+    linkToDashboard() {
+      this.$router.push({ path: '/home' })
+    },
+    linkToFaq() {
+      this.$router.push({ path: '/home/faq' })
     }
   }
 }
@@ -79,6 +88,7 @@ export default {
 <style scoped>
 .container-fluid {
   background: rgba(135, 150, 238, 0.2);
+  height: inherit;
 }
 
 /* ========================================================================= */
