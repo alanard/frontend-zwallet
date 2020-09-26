@@ -88,6 +88,8 @@ export default {
   width: 87%;
   margin: 100px auto;
   justify-content: space-between;
+
+  cursor: pointer;
 }
 
 /* ================================================================== */
