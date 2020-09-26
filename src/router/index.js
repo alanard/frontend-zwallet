@@ -9,9 +9,6 @@ import Pin from '../views/main/auth/pin.vue'
 import Personal from '../views/main/profile/personal.vue'
 import ChangePw from '../views/main/profile/change-pw.vue'
 import History from '../views/main/history/history.vue'
-import Transfer from '../views/main/transfer/transfer-page.vue'
-import Search from '../views/main/transfer/search.vue'
-import Input from '../views/main/transfer/input-amount.vue'
 /* My Part */
 import Home from '../views/main/home/home.vue'
 
@@ -67,23 +64,6 @@ const routes = [
     path: '/history',
     name: 'History',
     component: History
-  },
-  {
-    path: '/transfer',
-    name: 'Transfer',
-    component: Transfer,
-    children: [
-      {
-        path: '/',
-        name: 'Search',
-        component: Search
-      },
-      {
-        path: 'input',
-        name: 'Input',
-        component: Input
-      }
-    ]
   }
 ]
 
