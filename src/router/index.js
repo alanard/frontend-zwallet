@@ -3,6 +3,8 @@ import VueRouter from 'vue-router'
 import Main from '../views/main/index.vue'
 import Home from '../views/main/home/home.vue'
 import Dashboard from '../views/main/home/dashboard/Dashboard.vue'
+import Faq from '../views/main/home/faq/Faq.vue'
+import ModalPin from '../components/_base/ModalPin.vue'
 
 Vue.use(VueRouter)
 
@@ -18,8 +20,18 @@ const routes = [
     component: Home,
     children: [
       {
-        path: 'dashboard',
+        path: '/',
         component: Dashboard
+      },
+      {
+        path: 'faq',
+        name: Faq,
+        component: Faq
+      },
+      {
+        path: 'modalpin',
+        name: ModalPin,
+        component: ModalPin
       }
     ]
   }
