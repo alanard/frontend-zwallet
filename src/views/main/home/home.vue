@@ -13,6 +13,9 @@
             <div class="name">Robert Ard Junior</div>
             <div class="phoneNumber">+62 87789 9988 7733</div>
           </div>
+          <i class="far fa-bell" @click="ModalActive"></i>
+          <!-- Modal Notification -->
+          <ModalNotification v-show="isShow" />
         </div>
       </div>
     </div>
@@ -54,8 +57,22 @@
 </template>
 
 <script>
+import ModalNotification from '../../../components/_base/ModalNotification'
 export default {
-  name: 'Home'
+  name: 'Home',
+  data() {
+    return {
+      isShow: false
+    }
+  },
+  components: {
+    ModalNotification
+  },
+  methods: {
+    ModalActive() {
+      this.isShow = !this.isShow
+    }
+  }
 }
 </script>
 
@@ -85,7 +102,7 @@ export default {
 /* Myprofile */
 .navbar .myprofile {
   /* border: 1px solid black; */
-  margin-right: 140px;
+  margin-right: 100px;
   display: flex;
 }
 
@@ -112,6 +129,20 @@ export default {
 
 .myprofile .bio .phoneNumber {
   font-size: 13px;
+}
+
+.myprofile .far {
+  /* border: 1px solid black; */
+  display: flex;
+  font-size: 24px;
+  align-items: center;
+  margin-left: 20px;
+
+  cursor: pointer;
+}
+
+.myprofile .far:hover {
+  color: #6379f4;
 }
 
 /* ========================================================================= */

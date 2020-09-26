@@ -56,6 +56,30 @@
             <div class="method">+Rp150.000</div>
           </div>
         </div>
+        <div class="transaction-history">
+          <div class="people">
+            <img src="../../../../assets/User/friend.png" alt="" />
+            <div class="bio">
+              <div class="name">Netflix</div>
+              <div class="method">Subscription</div>
+            </div>
+          </div>
+          <div class="total-method">
+            <div class="method">-Rp149.000</div>
+          </div>
+        </div>
+        <div class="transaction-history">
+          <div class="people">
+            <img src="../../../../assets/User/friend.png" alt="" />
+            <div class="bio">
+              <div class="name">Casandra Ice</div>
+              <div class="method">Transfer</div>
+            </div>
+          </div>
+          <div class="total-method">
+            <div class="method">+Rp150.000</div>
+          </div>
+        </div>
       </div>
     </div>
   </div>
@@ -157,7 +181,7 @@ export default {}
   border-radius: 25px;
   margin-right: 20px;
 
-  height: 385px;
+  height: 440px;
   display: flex;
   flex-direction: column;
 }
@@ -219,7 +243,7 @@ export default {}
   box-shadow: 0px 4px 20px rgba(0, 0, 0, 0.05);
   border-radius: 25px;
 
-  height: 385px;
+  height: 440px;
 }
 
 .main-right .transaction-history-title {
