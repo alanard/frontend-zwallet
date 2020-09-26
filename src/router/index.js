@@ -10,7 +10,6 @@ import Personal from '../views/main/profile/personal.vue'
 import ChangePw from '../views/main/profile/change-pw.vue'
 import History from '../views/main/history/history.vue'
 /* My Part */
-import Home from '../views/main/home/home.vue'
 
 Vue.use(VueRouter)
 
@@ -19,16 +18,6 @@ const routes = [
     path: '/',
     name: 'Main',
     component: Main
-  },
-  // {
-  //   path: '/home',
-  //   name: 'Home',
-  //   component: Home
-  // },
-  {
-    path: '/home',
-    name: 'Home',
-    component: Home
   },
   {
     path: '/register',
