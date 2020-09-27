@@ -18,12 +18,12 @@
                     <form>
                         <div class="form-group">
                             <i class="satu far fa-envelope fa-lg fa-fw"></i>
-                            <input type="email" placeholder="Enter your email">
+                            <input type="email" placeholder="Enter your email" v-model="email">
                         </div>
                         <div class="form-group">
                             <div class="input-group">
                                 <i class="satu fa fa-lock fa-lg fa-fw" aria-hidden="true"></i>
-                                <input :type="type" placeholder="Enter your password">
+                                <input :type="type" placeholder="Enter your password" v-model="password">
                                 <div class="input-group-append" style="margin-left:-40px">
                                     <div @click="show">
                                         <i v-show="display" class="fa fa-eye"></i>
@@ -33,7 +33,7 @@
                             </div>
                             <p class="text-right my-3" style="width:80%"><router-link to="/forgot">Forgot password?</router-link></p>
                         </div>
-                        <button type="submit" class="btn">Login</button>
+                        <button type="submit" class="btn" @click.prevent="submit">Login</button>
                     </form>
                     <div style="width: 80%"><p class="text-center my-4">Don't have an account?<router-link to="/register"><strong>Sign Up</strong></router-link></p></div>
             </div>
@@ -41,6 +41,7 @@
 </template>
 
 <script>
+import { mapActions } from 'vuex'
 import leftSide from './side'
 export default {
   components: {
@@ -50,10 +51,20 @@ export default {
     return {
       type: 'password',
       active: false,
-      display: true
+      display: true,
+      email: '',
+      password: ''
     }
   },
   methods: {
+    ...mapActions(['login']),
+    submit() {
+      const data = {
+        email: this.email,
+        password: this.password
+      }
+      this.login(data)
+    },
     show() {
       this.type = this.type === 'password' ? 'text' : 'password'
       this.active = !this.active
@@ -100,7 +111,7 @@ input:focus {
 }
 input {
     width: 80%;
-    padding-left: 30px;
+    padding-left: 40px;
 }
 i.satu {
     position: absolute;
