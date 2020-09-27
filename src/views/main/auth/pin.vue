@@ -24,8 +24,16 @@
                     </p>
                     <form>
                         <div class="form-group" v-show="showing">
-                            <i class="satu far fa-envelope fa-lg fa-fw"></i>
-                            <input type="email" placeholder="Enter your email">
+                            <div class="input-wrapper">
+                                    <div class="input-group d-flex justify-content-between my-5">
+                                        <input type="number" onKeyPress="if(this.value.length==1) return false;">
+                                        <input type="number" onKeyPress="if(this.value.length==1) return false;">
+                                        <input type="number" onKeyPress="if(this.value.length==1) return false;">
+                                        <input type="number" onKeyPress="if(this.value.length==1) return false;">
+                                        <input type="number" onKeyPress="if(this.value.length==1) return false;">
+                                        <input type="number" onKeyPress="if(this.value.length==1) return false;">
+                                    </div>
+                            </div>
                         </div>
                         <button type="submit" class="btn" @click.prevent="showing = !showing" v-show="showing">Confirm</button>
                         <button type="submit" class="btn mt-5" @click.prevent="login" v-show="!showing" style="background:#6379F4;color:#fff">Login Now</button>
@@ -40,19 +48,13 @@ export default {
   components: {
     leftSide
   },
-  data () {
+  data() {
     return {
-      type: 'password',
-      active: false,
       showing: true
     }
   },
   methods: {
-    show () {
-      this.type = this.type === 'password' ? 'text' : 'password'
-      this.active = !this.active
-    },
-    login () {
+    login() {
       this.$router.push('/login')
     }
   }
@@ -71,14 +73,6 @@ export default {
     background: #6379F4;
     width: 50%;
 }
-.img-wrapper {
-    margin: auto;
-    object-fit: cover;
-}
-.img-wrapper img {
-    width: 80%;
-    height: 500px;
-}
 
 /* TWO */
 .two {
@@ -94,45 +88,47 @@ export default {
 input:focus {
     outline: none;
 }
-input {
-    width: 80%;
-    padding-left: 30px;
-}
-i.satu {
-    position: absolute;
-    color:  rgba(169, 169, 169, 0.6);
-}
-input[type=text] {
-  border: none;
-  border-bottom: 1.5px solid rgba(169, 169, 169, 0.6);
-}
-input[type=email] {
-  border: none;
-  border-bottom: 1.5px solid rgba(169, 169, 169, 0.6);
-}
-input[type=password] {
-  border: none;
-  border-bottom: 1.5px solid rgba(169, 169, 169, 0.6);
-}
 .form-group {
     margin: 60px 0px;
 }
-.input-group-append {
-    cursor: pointer;
-}
-.active {
-    height: 15px;
-    line-height: 15px;
-    border-radius: 18px;
-    background: #A9A9A9;
-}
 
-button {
+/* button {
     width: 80%;
     background: #DADADA;
     box-shadow: 0px 6px 75px rgba(100, 87, 87, 0.05);
     border-radius: 12px;
     color: #88888F;
+} */
+/* PIN */
+.input-wrapper {
+    margin: auto;
+    width: 100%;
+    margin-top: 100px;
+}
+input[type=number]::-webkit-inner-spin-button,
+input[type=number]::-webkit-outer-spin-button {
+    appearance: none;
+    margin: 0;
+}
+input[type=number] {
+    height: 65px;
+    width: 10%;
+    font-size: 30px;
+    font-weight: bold;
+    text-align: center;
+    border: 1px solid rgba(169, 169, 169, 0.6);
+    box-sizing: border-box;
+    box-shadow: 0px 10px 75px rgba(147, 147, 147, 0.1);
+    border-radius: 10px;
+    outline-color: cadetblue;
+}
+.btn {
+    text-align: center;
+    background: #DADADA;
+    box-shadow: 0px 6px 75px rgba(100, 87, 87, 0.05);
+    border-radius: 12px;
+    width: 100%;
+    height: 57px;
 }
 @media screen and (max-width: 992px) {
   .wrapper {
