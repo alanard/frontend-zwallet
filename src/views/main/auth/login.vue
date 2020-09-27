@@ -25,7 +25,10 @@
                                 <i class="satu fa fa-lock fa-lg fa-fw" aria-hidden="true"></i>
                                 <input :type="type" placeholder="Enter your password">
                                 <div class="input-group-append" style="margin-left:-40px">
-                                    <div :class="{active:active}" @click="show"><i class="fa fa-eye"></i></div>
+                                    <div @click="show">
+                                        <i v-show="display" class="fa fa-eye"></i>
+                                        <i v-show="!display" class="dua fa fa-eye-slash"></i>
+                                    </div>
                                 </div>
                             </div>
                             <p class="text-right my-3" style="width:80%"><router-link to="/forgot">Forgot password?</router-link></p>
@@ -43,16 +46,18 @@ export default {
   components: {
     leftSide
   },
-  data () {
+  data() {
     return {
       type: 'password',
-      active: false
+      active: false,
+      display: true
     }
   },
   methods: {
-    show () {
+    show() {
       this.type = this.type === 'password' ? 'text' : 'password'
       this.active = !this.active
+      this.display = !this.display
     }
   }
 }
@@ -118,12 +123,6 @@ input[type=password] {
 }
 .input-group-append {
     cursor: pointer;
-}
-.active {
-    height: 15px;
-    line-height: 15px;
-    border-radius: 18px;
-    background: #A9A9A9;
 }
 
 button {
