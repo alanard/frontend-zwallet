@@ -1,7 +1,7 @@
 <template>
     <div>
         <div class="container">
-            <div class="card-head pt-5 pl-3">
+            <div class="card-head pt-4 pl-4">
                 <h5>Personal Information</h5>
                 <p class="text-wrapper">
                     We got your personal information from the sign up proccess.
@@ -25,7 +25,7 @@
                     <h6 style="color: #7A7886;">Phone Number</h6>
                     <div class="phone-group d-flex justify-content-between">
                         <h5>{{user.phone}}</h5>
-                        <span>Manage</span>
+                        <span> <router-link to="/home/profile/phone"> Manage</router-link></span>
                     </div>
                 </div>
             </div>
@@ -56,8 +56,8 @@ export default {
 }
 .user-info {
     width: 100%;
-    height: 92px;
-    margin: 30px 0;
+    /* height: 92px; */
+    margin: 20px 0;
     padding: 9px 15px;
     background: #FFFFFF;
     box-shadow: 0px 4px 20px rgba(0, 0, 0, 0.05);

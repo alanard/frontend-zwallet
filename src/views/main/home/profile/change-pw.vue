@@ -1,7 +1,7 @@
 <template>
     <div>
         <div class="container">
-            <div class="card-head pt-5 pl-3">
+            <div class="card-head pt-5 pl-4">
                 <h5>Change Password</h5>
                 <p class="text-wrapper">
                     You must enter your current password and then type your new password twice.

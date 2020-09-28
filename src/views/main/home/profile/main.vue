@@ -69,10 +69,8 @@ export default {
 .profile {
     padding: 30px 0;
     text-align: center;
-    border: 1px solid black;
 }
 .profile-body {
-    border: 1px solid black;
     margin-top: 40px;
 }
 .manage {

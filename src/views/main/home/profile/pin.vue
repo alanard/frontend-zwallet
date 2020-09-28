@@ -1,7 +1,7 @@
 <template>
     <div>
         <div class="pin-wrapper">
-            <div class="pin-head pt-5 pl-3">
+            <div class="pin-head pt-5 pl-5">
                 <h5>Change PIN</h5>
                 <p class="text-wrapper">
                     Enter your current 6 digits Zwallet PIN below to continue to the next steps.

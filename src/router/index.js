@@ -11,13 +11,13 @@ import MainProfile from '../views/main/home/profile/main.vue'
 import Personal from '../views/main/home/profile/personal.vue'
 import ChangePw from '../views/main/home/profile/change-pw.vue'
 import ChangePin from '../views/main/home/profile/pin.vue'
+import Phone from '../views/main/home/profile/phone.vue'
 import History from '../views/main/home/history/History.vue'
 import store from '../store/index'
 /* My Part */
 import Home from '../views/main/home/home.vue'
 import Dashboard from '../views/main/home/dashboard/Dashboard.vue'
 import Faq from '../views/main/home/faq/Faq.vue'
-// import ModalPin from '../components/_base/ModalPin.vue'
 
 Vue.use(VueRouter)
 
@@ -72,6 +72,10 @@ const routes = [
             path: 'pin',
             // name: 'pin',
             component: ChangePin
+          },
+          {
+            path: 'phone',
+            component: Phone
           }
         ]
       }
