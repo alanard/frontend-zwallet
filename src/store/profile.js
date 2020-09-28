@@ -23,6 +23,9 @@ const mutations = {
     console.log(payload)
     state.token = payload.token
     // state.user = payload
+  },
+  LOGOUT(state) {
+    state.token = null
   }
 }
 
@@ -97,6 +100,11 @@ const actions = {
           }
         })
     })
+  },
+  logout(context) {
+    context.commit('LOGOUT')
+    localStorage.removeItem('token')
+    router.push('/login')
   }
 }
 

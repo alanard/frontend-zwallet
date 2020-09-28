@@ -28,6 +28,9 @@
                         <h5 class="pointer">Change PIN</h5>
                         <img class="pointer" src="../../../../assets/arrow-left.svg">
                     </div>
+                    <div class="manage pointer d-flex justify-content-between" @click="logout">
+                        <h5 class="pointer">Logout</h5>
+                    </div>
                 </div>
             </div>
         </div>
@@ -35,12 +38,13 @@
 </template>
 
 <script>
-import { mapGetters } from 'vuex'
+import { mapGetters, mapActions } from 'vuex'
 export default {
   computed: {
     ...mapGetters({ users: 'get_user' })
   },
   methods: {
+    ...mapActions(['logout']),
     toPersonal() {
       this.$router.push('/home/profile/personal')
     },
