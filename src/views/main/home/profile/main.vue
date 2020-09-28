@@ -40,11 +40,17 @@
 <script>
 import { mapGetters, mapActions } from 'vuex'
 export default {
+  mounted() {
+    this.getUserLogin()
+  },
   computed: {
-    ...mapGetters({ users: 'get_user' })
+    ...mapGetters({
+      users: 'get_user',
+      usersLogged: 'get_user_login'
+    })
   },
   methods: {
-    ...mapActions(['logout']),
+    ...mapActions(['logout', 'getUserLogin']),
     toPersonal() {
       this.$router.push('/home/profile/personal')
     },

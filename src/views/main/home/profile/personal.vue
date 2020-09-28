@@ -38,7 +38,9 @@ import { mapGetters } from 'vuex'
 export default {
   name: 'personal',
   computed: {
-    ...mapGetters({ users: 'get_user' })
+    ...mapGetters({
+      users: 'get_user'
+    })
   }
 }
 </script>

@@ -10,7 +10,9 @@ const state = {
       email: 'pewdiepie1@gmail.com'
     }
   ],
+  userLogin: [],
   token: localStorage.getItem('token') || null,
+  userId: localStorage.getItem('id') || null,
   username: localStorage.getItem('username') || null
 }
 
@@ -22,10 +24,13 @@ const mutations = {
   LOGIN_USER(state, payload) {
     console.log(payload)
     state.token = payload.token
-    // state.user = payload
+    state.userId = payload.userId
   },
   LOGOUT(state) {
     state.token = null
+  },
+  USER_LOGGED(state, payload) {
+    state.userLogin = (payload)
   }
 }
 
@@ -104,7 +109,18 @@ const actions = {
   logout(context) {
     context.commit('LOGOUT')
     localStorage.removeItem('token')
+    localStorage.removeItem('id')
     router.push('/login')
+  },
+  getUserLogin(context) {
+    return new Promise((resolve, reject) => {
+      const id = localStorage.getItem('id')
+      axios.get(`${process.env.VUE_APP_BASE_URL}/api/v1/user/${id}`)
+        .then(res => {
+          console.log(res.data.result)
+          context.commit('USER_LOGGED', res.data.result)
+        })
+    })
   }
 }
 
@@ -114,6 +130,9 @@ const getters = {
   },
   is_login(state) {
     return state.token !== null
+  },
+  get_user_login(state) {
+    return state.userLogin
   }
 }
 export default {
