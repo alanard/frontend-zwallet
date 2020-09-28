@@ -1,77 +1,70 @@
 <template>
-  <div>
-    <!-- Button trigger modal -->
-    <!-- Tombol nya cuman buat test aja mang, nanti bisa bisa disambungin ke page yang bersangkutan pake emit -->
-    <button
-      type="button"
-      class="btn btn-primary"
-      data-toggle="modal"
-      data-target="#exampleModal"
-    >
-      Launch demo modal
-    </button>
-
-    <!-- Modal -->
-    <div
-      class="modal fade"
-      id="exampleModal"
-      tabindex="-1"
-      role="dialog"
-      aria-labelledby="exampleModalLabel"
-      aria-hidden="true"
-    >
-      <div class="modal-dialog" role="document">
-        <div class="modal-content">
-          <div class="modal-header">
-            <h5 class="modal-title" id="exampleModalLabel">
-              Enter PIN to Transfer
-            </h5>
-            <button
-              type="button"
-              class="close"
-              data-dismiss="modal"
-              aria-label="Close"
-            >
-              <span aria-hidden="true">&times;</span>
-            </button>
-          </div>
-          <div class="modal-body">
-            <div class="title-body">
-              Enter your 6 digits PIN for confirmation to <br />
-              continue transferring money.
-            </div>
-            <div class="content-body">
-              <!-- ========================== -->
-              <!-- Disini Tempat Input Pin nya, Tolong diisi ya mang biar sama kaya punya mamang di login -->
-            </div>
-          </div>
-          <div class="modal-footer">
-            <button type="button" class="btn btn-primary">Continue</button>
-          </div>
-        </div>
-      </div>
+  <div class="modal-pin">
+    <div class="title">
+      Enter PIN to Transfer
+      <i class="fas fa-times" @click="$emit('close-modal')"></i>
     </div>
+    <div class="title-content">
+      Enter your 6 digits PIN for confirmation to <br />
+      continue transferring money.
+    </div>
+    <div class="content">
+      <input type="text" placeholder="___" />
+      <input type="text" placeholder="___" />
+      <input type="text" placeholder="___" />
+      <input type="text" placeholder="___" />
+      <input type="text" placeholder="___" />
+      <input type="text" placeholder="___" />
+    </div>
+    <button class="btn btn-primary" @click="linkToSuccess">Continue</button>
   </div>
 </template>
 
 <script>
 export default {
-  name: 'ModalPin'
+  name: 'ModalPin',
+  methods: {
+    linkToSuccess() {
+      this.$router.push({ path: '/home/transfersuccess' })
+    }
+  }
 }
 </script>
 
 <style scoped>
-.modal-dialog {
-  background: #ffffff;
-  box-shadow: 0px 4px 20px rgba(0, 0, 0, 0.05);
-  border-radius: 25px;
-  overflow: hidden;
+.modal-pin {
+  /* border: 1px solid black; */
+  font-family: 'Nunito Sans', sans-serif;
+  position: fixed;
+  top: 100px;
+  left: 580px;
+  width: 503px;
+  height: 417px;
 
-  margin-top: 160px;
+  background: #ffffff;
+  box-shadow: 0px 4px 200px rgba(0, 0, 0, 0.05);
+  border-radius: 25px;
 }
 
-.modal-body .title-body {
-  font-family: Nunito Sans;
+.modal-pin .title {
+  /* border: 1px solid black; */
+  margin: 30px 30px 30px 30px;
+
+  display: flex;
+  justify-content: space-between;
+
+  font-style: normal;
+  font-weight: bold;
+  font-size: 18px;
+  line-height: 25px;
+  /* identical to box height */
+
+  /* Zwallet/Dark */
+
+  color: #3a3d42;
+}
+
+.modal-pin .title-content {
   font-style: normal;
   font-weight: normal;
   font-size: 16px;
@@ -79,14 +72,46 @@ export default {
   /* or 187% */
 
   color: rgba(58, 61, 66, 0.6);
+  margin: 30px 30px 30px 30px;
 }
 
-.modal-footer .btn {
+.modal-pin .title i {
+  font-size: 25px;
+}
+
+.modal-pin .content {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-evenly;
+  margin: 0px 10px 0px 10px;
+}
+
+.modal-pin .content input {
+  height: 60px;
+  width: 53px;
+
+  background: #ffffff;
+  /* Grey/60% */
+
+  border: 1px solid rgba(169, 169, 169, 0.6);
+  box-sizing: border-box;
+  box-shadow: 0px 10px 75px rgba(147, 147, 147, 0.1);
+  border-radius: 10px;
+  text-align: center;
+  padding-top: 10px;
+  font-size: 40px;
+
+  margin-top: 20px;
+}
+
+.modal-pin .btn {
+  margin-top: 80px;
+  margin-left: 330px;
+  width: 140px;
+  height: 50px;
+
   background: #6379f4;
   box-shadow: 0px 6px 75px rgba(100, 87, 87, 0.05);
   border-radius: 12px;
-
-  width: 120px;
-  height: 45px;
 }
 </style>

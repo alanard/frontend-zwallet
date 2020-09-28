@@ -31,7 +31,8 @@
             ><span @click="linkToDashboard">Dashboard</span>
           </div>
           <div class="item">
-            <i class="fas fa-arrow-up"></i><span>Transfer</span>
+            <i class="fas fa-arrow-up"></i
+            ><span @click="linkToTransfer">Transfer</span>
           </div>
           <div class="item">
             <i class="fas fa-plus"></i><span @click="linkToFaq">Top Up</span>
@@ -80,6 +81,9 @@ export default {
     },
     linkToFaq() {
       this.$router.push({ path: '/home/faq' })
+    },
+    linkToTransfer() {
+      this.$router.push({ path: '/home/transfer' })
     }
   }
 }
@@ -88,7 +92,7 @@ export default {
 <style scoped>
 .container-fluid {
   background: rgba(135, 150, 238, 0.2);
-  height: inherit;
+  height: 1000px;
 }
 
 /* ========================================================================= */
@@ -168,7 +172,7 @@ export default {
   /* border: 1px solid black; */
   border-radius: 15px;
 
-  height: 100vh;
+  height: 130vh;
   background: #ffffff;
   margin-left: 60px;
   box-shadow: 0px 4px 20px rgba(0, 0, 0, 0.05);
