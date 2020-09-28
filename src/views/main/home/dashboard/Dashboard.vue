@@ -9,7 +9,7 @@
         <div class="phone-number">+62 813-9387-7946</div>
       </div>
       <div class="item-right">
-        <button class="btn btn-primary">
+        <button class="btn btn-primary" @click="linkToTransfer">
           <i class="fas fa-arrow-up"></i> Transfer
         </button>
         <button class="btn btn-primary">
@@ -87,7 +87,12 @@
 
 <script>
 export default {
-  name: 'Dashboard'
+  name: 'Dashboard',
+  methods: {
+    linkToTransfer() {
+      this.$router.push({ path: '/home/transfer' })
+    }
+  }
 }
 </script>
 
@@ -183,7 +188,7 @@ export default {
   border-radius: 25px;
   margin-right: 20px;
 
-  height: 440px;
+  height: 100vh;
   display: flex;
   flex-direction: column;
 }
@@ -245,7 +250,7 @@ export default {
   box-shadow: 0px 4px 20px rgba(0, 0, 0, 0.05);
   border-radius: 25px;
 
-  height: 440px;
+  height: 100vh;
 }
 
 .main-right .transaction-history-title {
