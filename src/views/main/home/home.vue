@@ -96,7 +96,6 @@ export default {
 <style scoped>
 .container-fluid {
   background: rgba(135, 150, 238, 0.2);
-  height: 1000px;
 }
 
 /* ========================================================================= */

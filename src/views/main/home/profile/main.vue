@@ -8,7 +8,7 @@
                     </div>
                     <div class="edit my-2">
                         <img src="../../../../assets/edit-2.png">
-                        <span class="ml-1">Edit</span>
+                        <span class="ml-1 pointer" @click="edit(user)">Edit</span>
                     </div>
                     <div class="profile-user">
                         <h4>{{user.firstName}} {{user.lastName}}</h4>
@@ -33,13 +33,31 @@
                     </div>
                 </div>
             </div>
+            <modal :data="userData" v-show="active" @close="toggle" @fire-event="updateData" />
         </div>
     </div>
 </template>
 
 <script>
 import { mapGetters, mapActions } from 'vuex'
+import modal from './modal'
 export default {
+  components: {
+    modal
+  },
+  data() {
+    return {
+      active: false,
+      userData: {
+        id: null,
+        username: '',
+        firstName: '',
+        lastName: '',
+        phone: '',
+        image: null
+      }
+    }
+  },
   mounted() {
     this.getUserLogin()
   },
@@ -50,7 +68,7 @@ export default {
     })
   },
   methods: {
-    ...mapActions(['logout', 'getUserLogin']),
+    ...mapActions(['logout', 'getUserLogin', 'updateUser']),
     toPersonal() {
       this.$router.push('/home/profile/personal')
     },
@@ -59,6 +77,43 @@ export default {
     },
     toChangePIN() {
       this.$router.push('/home/profile/pin')
+    },
+    edit(user) {
+      console.log(user)
+      this.userData.id = user.userId
+      this.userData.username = user.username
+      this.userData.firstName = user.firstName
+      this.userData.lastName = user.lastName
+      this.userData.phone = user.phone
+      this.userData.image = user.image
+      this.active = !this.active
+    },
+    updateData() {
+      const fd = new FormData()
+      fd.append('username', this.userData.username)
+      fd.append('firstName', this.userData.firstName)
+      fd.append('lastName', this.userData.lastName)
+      fd.append('phone', this.userData.phone)
+      fd.append('image', this.userData.image)
+      const data = { id: this.userData.id, data: fd }
+      this.updateUser(data)
+        .then(res => {
+          this.clearData()
+          this.getUserLogin()
+          alert('Data successfully updated')
+        })
+    },
+    clearData() {
+      this.userData.id = null
+      this.userData.username = ''
+      this.userData.firstName = ''
+      this.userData.Lastname = ''
+      this.userData.phone = ''
+      this.userData.image = null
+      this.active = !this.active
+    },
+    toggle() {
+      this.active = false
     }
   }
 }
@@ -67,7 +122,7 @@ export default {
 <style scoped>
 .profile-wrapper {
     width: 100%;
-    height: 100vh;
+    height: 130vh;
     background: #FFFFFF;
     box-shadow: 0px 4px 20px rgba(0, 0, 0, 0.05);
     border-radius: 25px;

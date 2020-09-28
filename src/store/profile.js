@@ -112,6 +112,15 @@ const actions = {
     localStorage.removeItem('id')
     router.push('/login')
   },
+  updateUser(context, payload) {
+    return new Promise((resolve, reject) => {
+      axios.patch(`${process.env.VUE_APP_BASE_URL}/api/v1/user/${payload.id}`, payload.data)
+        .then(res => {
+          console.log(res.data.result)
+          resolve(res.data.result)
+        })
+    })
+  },
   getUserLogin(context) {
     return new Promise((resolve, reject) => {
       const id = localStorage.getItem('id')
