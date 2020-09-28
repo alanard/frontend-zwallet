@@ -13,6 +13,9 @@
             <div class="name">Robert Ard Junior</div>
             <div class="phoneNumber">+62 87789 9988 7733</div>
           </div>
+          <i class="far fa-bell" @click="ModalActive"></i>
+          <!-- Modal Notification -->
+          <ModalNotification v-show="isShow" />
         </div>
       </div>
     </div>
@@ -24,12 +27,16 @@
       <div class="col-md-3 aside-left">
         <div class="row">
           <div class="item">
-            <i class="fas fa-border-none"></i><span>Dashboard</span>
+            <i class="fas fa-border-none"></i
+            ><span @click="linkToDashboard">Dashboard</span>
           </div>
           <div class="item">
-            <i class="fas fa-arrow-up"></i><span>Transfer</span>
+            <i class="fas fa-arrow-up"></i
+            ><span @click="linkToTransfer">Transfer</span>
           </div>
-          <div class="item"><i class="fas fa-plus"></i><span>Top Up</span></div>
+          <div class="item">
+            <i class="fas fa-plus"></i><span @click="linkToFaq">Top Up</span>
+          </div>
           <div class="item">
             <i class="far fa-user"></i><span>Profile</span>
           </div>
@@ -37,7 +44,7 @@
       </div>
       <!-- ==================================== -->
       <!-- content item -->
-      <div class="col-md-8 content-item">Main</div>
+      <div class="col-md-8 content-item"><router-view></router-view></div>
     </div>
     <!-- ============================================================================ -->
     <!-- Footer -->
@@ -54,14 +61,38 @@
 </template>
 
 <script>
+import ModalNotification from '../../../components/_base/ModalNotification'
 export default {
-  name: 'Home'
+  name: 'Home',
+  data() {
+    return {
+      isShow: false
+    }
+  },
+  components: {
+    ModalNotification
+  },
+  methods: {
+    ModalActive() {
+      this.isShow = !this.isShow
+    },
+    linkToDashboard() {
+      this.$router.push({ path: '/home' })
+    },
+    linkToFaq() {
+      this.$router.push({ path: '/home/faq' })
+    },
+    linkToTransfer() {
+      this.$router.push({ path: '/home/transfer' })
+    }
+  }
 }
 </script>
 
 <style scoped>
 .container-fluid {
   background: rgba(135, 150, 238, 0.2);
+  height: 1000px;
 }
 
 /* ========================================================================= */
@@ -85,7 +116,7 @@ export default {
 /* Myprofile */
 .navbar .myprofile {
   /* border: 1px solid black; */
-  margin-right: 140px;
+  margin-right: 100px;
   display: flex;
 }
 
@@ -114,12 +145,26 @@ export default {
   font-size: 13px;
 }
 
+.myprofile .far {
+  /* border: 1px solid black; */
+  display: flex;
+  font-size: 24px;
+  align-items: center;
+  margin-left: 20px;
+
+  cursor: pointer;
+}
+
+.myprofile .far:hover {
+  color: #6379f4;
+}
+
 /* ========================================================================= */
 /* Sedangkan ini setingan Content yang membungkus navbar dan content-item */
 .content {
   /* border: 1px solid black; */
   margin: 40px auto;
-  width: 90%;
+  width: 95%;
 }
 
 /* aside Left */
@@ -127,9 +172,9 @@ export default {
   /* border: 1px solid black; */
   border-radius: 15px;
 
-  height: 100vh;
+  height: 130vh;
   background: #ffffff;
-  margin-left: 36px;
+  margin-left: 60px;
   box-shadow: 0px 4px 20px rgba(0, 0, 0, 0.05);
 }
 
@@ -160,9 +205,6 @@ export default {
   /* border: 1px solid black; */
   border-radius: 15px;
   height: 100vh;
-  background: #ffffff;
-  margin-left: 30px;
-  box-shadow: 0px 4px 20px rgba(0, 0, 0, 0.05);
 }
 
 /* ===================================================================== */
