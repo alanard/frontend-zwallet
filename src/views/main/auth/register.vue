@@ -29,16 +29,16 @@
                     <form>
                         <div class="form-group">
                             <i class="satu far fa-user fa-lg fa-fw" aria-hidden="true"></i>
-                            <input type="text" class="name" placeholder="Enter your name">
+                            <input type="text" class="name" placeholder="Enter your name" v-model="username">
                         </div>
                         <div class="form-group">
                             <i class="satu far fa-envelope fa-lg fa-fw"></i>
-                            <input type="email" placeholder="Enter your email">
+                            <input type="email" placeholder="Enter your email" v-model="email">
                         </div>
                         <div class="form-group">
                             <div class="input-group">
                                 <i class="satu fa fa-lock fa-lg fa-fw" aria-hidden="true"></i>
-                                <input :type="type" placeholder="Create your password">
+                                <input :type="type" placeholder="Create your password" v-model="password">
                                 <div class="input-group-append" style="margin-left:-40px">
                                     <div @click="show">
                                         <i v-show="display" class="fa fa-eye"></i>
@@ -47,7 +47,7 @@
                                 </div>
                             </div>
                         </div>
-                        <button type="submit" class="btn" @click.prevent="register">Sign Up</button>
+                        <button type="submit" class="btn" @click.prevent="submit">Sign Up</button>
                     </form>
                     <div style="width: 80%"><p class="text-center my-4">Already have an account?<router-link to="/login"><strong>Let's Login</strong></router-link></p></div>
             </div>
@@ -55,22 +55,32 @@
 </template>
 
 <script>
+import { mapActions } from 'vuex'
 export default {
   data() {
     return {
       type: 'password',
       active: false,
-      display: true
+      display: true,
+      username: '',
+      email: '',
+      password: ''
     }
   },
   methods: {
+    ...mapActions(['register']),
+    submit() {
+      const data = {
+        username: this.username,
+        email: this.email,
+        password: this.password
+      }
+      this.register(data)
+    },
     show() {
       this.type = this.type === 'password' ? 'text' : 'password'
       this.active = !this.active
       this.display = !this.display
-    },
-    register() {
-      this.$router.push('/pin')
     }
   }
 }
@@ -113,7 +123,7 @@ input:focus {
 }
 input {
     width: 80%;
-    padding-left: 30px;
+    padding-left: 40px;
 }
 i.satu {
     position: absolute;
@@ -140,6 +150,7 @@ input[type=password] {
 
 button {
     width: 80%;
+    height: 57px;
     background: #DADADA;
     box-shadow: 0px 6px 75px rgba(100, 87, 87, 0.05);
     border-radius: 12px;

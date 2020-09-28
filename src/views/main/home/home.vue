@@ -37,7 +37,7 @@
             <i class="fas fa-plus"></i><span @click="linkToFaq">Top Up</span>
           </div>
           <div class="item">
-            <i class="far fa-user"></i><span>Profile</span>
+            <i class="far fa-user"></i><span @click="toProfile">Profile</span>
           </div>
         </div>
       </div>
@@ -80,6 +80,10 @@ export default {
     },
     linkToFaq() {
       this.$router.push({ path: '/home/faq' })
+    },
+    /* My part (Erlangga) */
+    toProfile() {
+      this.$router.push('/home/profile')
     }
   }
 }

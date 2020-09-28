@@ -11,7 +11,7 @@ import MainProfile from '../views/main/home/profile/main.vue'
 import Personal from '../views/main/home/profile/personal.vue'
 import ChangePw from '../views/main/home/profile/change-pw.vue'
 import ChangePin from '../views/main/home/profile/pin.vue'
-// import History from '../views/main/history/history.vue'
+import History from '../views/main/home/history/History.vue'
 import store from '../store/index'
 /* My Part */
 import Home from '../views/main/home/home.vue'
@@ -42,12 +42,12 @@ const routes = [
         name: Faq,
         component: Faq
       },
-      // {
-      //   path: 'modalpin',
-      //   name: ModalPin,
-      //   component: ModalPin
-      // },
       /* My Part (erlangga) */
+      {
+        path: 'history',
+        name: History,
+        component: History
+      },
       {
         path: 'profile',
         // name: 'profile',
@@ -99,11 +99,6 @@ const routes = [
     path: '/pin',
     name: 'Pin',
     component: Pin
-  },
-  {
-    path: '/history',
-    name: 'History',
-    component: History
   }
 ]
 

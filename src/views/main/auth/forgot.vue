@@ -28,18 +28,24 @@
                         <div class="form-group" v-show="!showing">
                             <div class="input-group">
                                 <i class="satu fa fa-lock fa-lg fa-fw" aria-hidden="true"></i>
-                                <input :type="type" placeholder="Enter your password">
+                                <input :type="type" placeholder="Create your password">
                                 <div class="input-group-append" style="margin-left:-40px">
-                                    <div :class="{active:active}" @click="show"><i class="fa fa-eye"></i></div>
+                                    <div @click="show">
+                                        <i v-show="display" class="fa fa-eye"></i>
+                                        <i v-show="!display" class="dua fa fa-eye-slash"></i>
+                                    </div>
                                 </div>
                             </div>
                         </div>
                         <div class="form-group" v-show="!showing">
                             <div class="input-group">
                                 <i class="satu fa fa-lock fa-lg fa-fw" aria-hidden="true"></i>
-                                <input :type="type" placeholder="Enter your password">
+                                <input :type="type2" placeholder="Create your password">
                                 <div class="input-group-append" style="margin-left:-40px">
-                                    <div :class="{active:active}" @click="show"><i class="fa fa-eye"></i></div>
+                                    <div @click="show2">
+                                        <i v-show="display2" class="fa fa-eye"></i>
+                                        <i v-show="!display2" class="dua fa fa-eye-slash"></i>
+                                    </div>
                                 </div>
                             </div>
                         </div>
@@ -56,17 +62,23 @@ export default {
   components: {
     leftSide
   },
-  data () {
+  data() {
     return {
       type: 'password',
-      active: false,
-      showing: true
+      type2: 'password',
+      showing: true,
+      display: true,
+      display2: true
     }
   },
   methods: {
-    show () {
+    show() {
       this.type = this.type === 'password' ? 'text' : 'password'
-      this.active = !this.active
+      this.display = !this.display
+    },
+    show2() {
+      this.type2 = this.type2 === 'password' ? 'text' : 'password'
+      this.display2 = !this.display2
     }
   }
 }
@@ -100,7 +112,7 @@ input:focus {
 }
 input {
     width: 80%;
-    padding-left: 30px;
+    padding-left: 40px;
 }
 i.satu {
     position: absolute;
@@ -124,15 +136,10 @@ input[type=password] {
 .input-group-append {
     cursor: pointer;
 }
-.active {
-    height: 15px;
-    line-height: 15px;
-    border-radius: 18px;
-    background: #A9A9A9;
-}
 
 button {
     width: 80%;
+    height: 57px;
     background: #DADADA;
     box-shadow: 0px 6px 75px rgba(100, 87, 87, 0.05);
     border-radius: 12px;

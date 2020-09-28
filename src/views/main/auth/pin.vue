@@ -89,6 +89,7 @@ input:focus {
     outline: none;
 }
 .form-group {
+    width: 75%;
     margin: 60px 0px;
 }
 
@@ -112,7 +113,7 @@ input[type=number]::-webkit-outer-spin-button {
 }
 input[type=number] {
     height: 65px;
-    width: 10%;
+    width: 13%;
     font-size: 30px;
     font-weight: bold;
     text-align: center;
@@ -127,7 +128,7 @@ input[type=number] {
     background: #DADADA;
     box-shadow: 0px 6px 75px rgba(100, 87, 87, 0.05);
     border-radius: 12px;
-    width: 100%;
+    width: 75%;
     height: 57px;
 }
 @media screen and (max-width: 992px) {

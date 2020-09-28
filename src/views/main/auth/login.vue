@@ -138,6 +138,7 @@ input[type=password] {
 
 button {
     width: 80%;
+    height: 57px;
     background: #DADADA;
     box-shadow: 0px 6px 75px rgba(100, 87, 87, 0.05);
     border-radius: 12px;
