@@ -45,8 +45,8 @@ export default {
   },
   computed: {
     ...mapGetters({
-      users: 'get_user',
-      usersLogged: 'get_user_login'
+    //   users: 'get_user',
+      users: 'get_user_login'
     })
   },
   methods: {

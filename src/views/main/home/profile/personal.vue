@@ -25,7 +25,7 @@
                     <h6 style="color: #7A7886;">Phone Number</h6>
                     <div class="phone-group d-flex justify-content-between">
                         <h5>{{user.phone}}</h5>
-                        <span> <router-link to="/home/profile/phone"> Manage</router-link></span>
+                        <span> <router-link to="/home/profile/phone">Manage</router-link></span>
                     </div>
                 </div>
             </div>
@@ -34,13 +34,19 @@
 </template>
 
 <script>
-import { mapGetters } from 'vuex'
+import { mapGetters, mapActions } from 'vuex'
 export default {
   name: 'personal',
+  mounted() {
+    this.getUserLogin()
+  },
   computed: {
     ...mapGetters({
-      users: 'get_user'
+      users: 'get_user_login'
     })
+  },
+  methods: {
+    ...mapActions(['getUserLogin'])
   }
 }
 </script>
