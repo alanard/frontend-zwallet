@@ -2,14 +2,6 @@ import axios from 'axios'
 import router from '../router/index'
 
 const state = {
-  // user: [
-  //   {
-  //     firstName: 'Robert',
-  //     lastName: 'Chandler',
-  //     phone: '+62 813-9387-7946',
-  //     email: 'pewdiepie1@gmail.com'
-  //   }
-  // ],
   userLogin: [],
   userRegister: [],
   token: localStorage.getItem('token') || null,

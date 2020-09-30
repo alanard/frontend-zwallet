@@ -29,8 +29,8 @@
                     <form>
                         <div class="form-group d-flex flex-column">
                             <i class="satu far fa-user fa-lg fa-fw" aria-hidden="true"></i>
-                            <input type="text" class="name" placeholder="Enter your name" v-model="username">
-                            <span class="validation" v-if="username.length < 1">Username Required</span>
+                            <input type="text" class="name" placeholder="Enter your name" v-model="$v.username.$model">
+                            <span v-if="$v.username.$error" class="validation">Username required</span>
                         </div>
                         <div class="form-group d-flex flex-column">
                             <i class="satu far fa-envelope fa-lg fa-fw"></i>
@@ -72,7 +72,11 @@ export default {
       password: ''
     }
   },
+  /* vuelidate */
   validations: {
+    username: {
+      required
+    },
     email: {
       required
     },

@@ -4,7 +4,7 @@
             <div class="profile" v-for="user in users" :key="user.id">
                 <div class="profile-head">
                     <div class="img-wrapper">
-                        <img src="../../../../assets/myprofile.png">
+                        <img :src="user.image">
                     </div>
                     <div class="edit my-2">
                         <img src="../../../../assets/edit-2.png">
@@ -156,5 +156,11 @@ export default {
 }
 .pointer {
     cursor: pointer;
+}
+.img-wrapper img {
+  width: 80px;
+  height: 80px;
+  object-fit: cover;
+  border-radius: 10px;
 }
 </style>

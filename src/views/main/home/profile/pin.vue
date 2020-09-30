@@ -14,7 +14,7 @@
                             <PincodeInput v-model="code" :length="length" />
                         </div>
                         <div class="submit mx-3">
-                            <button type="submit" class="btn">Continue</button>
+                            <button type="submit" class="btn" @click.prevent="changePin">Continue</button>
                         </div>
                     </form>
                 </div>
@@ -25,6 +25,8 @@
 
 <script>
 import PincodeInput from 'vue-pincode-input'
+// import { mapActions } from 'vuex'
+import axios from 'axios'
 export default {
   components: {
     PincodeInput
@@ -34,6 +36,17 @@ export default {
       code: '',
       length: 6
     }
+  },
+  methods: {
+    changePin() {
+      const id = localStorage.getItem('id')
+      axios.patch(`${process.env.VUE_APP_BASE_URL}/api/v1/pin/${id}`, { pin: this.code })
+        .then(() => {
+          alert('Change Pin Success')
+          this.code = ''
+        })
+        .catch(err => console.log(err))
+    }
   }
 }
 </script>
@@ -41,7 +54,7 @@ export default {
 <style scoped>
 .pin-wrapper {
     width: 100%;
-    height: 100vh;
+    height: 130vh;
     background: #FFFFFF;
     box-shadow: 0px 4px 20px rgba(0, 0, 0, 0.05);
     border-radius: 25px;
