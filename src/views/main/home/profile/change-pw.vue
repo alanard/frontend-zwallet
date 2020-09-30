@@ -9,9 +9,9 @@
             </div>
             <div class="card-body">
                 <div class="input-wrapper">
-                    <form>
+                    <form v-for="(user, index) in users" :key="index">
                         <div class="form-group">
-                            <div class="input-group">
+                            <div class="input-group" @click="edit(user)">
                                 <i class="satu fa fa-lock fa-lg fa-fw" aria-hidden="true"></i>
                                 <input :type="type" placeholder="Current password" required>
                                 <div class="input-group-append" style="margin-left:-20px">
@@ -25,7 +25,7 @@
                         <div class="form-group">
                             <div class="input-group">
                                 <i class="satu fa fa-lock fa-lg fa-fw" aria-hidden="true"></i>
-                                <input :type="type2" placeholder="New password" required>
+                                <input :type="type2" placeholder="New password" required v-model="userData.password">
                                 <div class="input-group-append" style="margin-left:-20px">
                                     <div @click="show2">
                                         <i class="dua fa fa-eye" v-show="display2"></i>
@@ -46,7 +46,7 @@
                                 </div>
                             </div>
                         </div>
-                        <button type="submit" class="btn btn-block">Change Password</button>
+                        <button type="submit" class="btn btn-block" @click.prevent="updateData">Change Password</button>
                     </form>
                 </div>
             </div>
@@ -55,6 +55,7 @@
 </template>
 
 <script>
+import { mapActions, mapGetters } from 'vuex'
 export default {
   name: 'changePw',
   data() {
@@ -66,10 +67,31 @@ export default {
       pw: true,
       display: true,
       display2: true,
-      display3: true
+      display3: true,
+      /* User update */
+      userData: {
+        id: null,
+        username: '',
+        firstName: '',
+        lastName: '',
+        email: '',
+        password: '',
+        phone: '',
+        balance: '',
+        image: null
+      }
     }
   },
+  mounted() {
+    this.getUserLogin()
+  },
+  computed: {
+    ...mapGetters({
+      users: 'get_user_login'
+    })
+  },
   methods: {
+    ...mapActions(['updateUser', 'getUserLogin']),
     show() {
       this.type = this.type === 'password' ? 'text' : 'password'
       this.active = !this.active
@@ -84,6 +106,43 @@ export default {
       this.type3 = this.type3 === 'password' ? 'text' : 'password'
       this.active = !this.active
       this.display3 = !this.display3
+    },
+    edit(user) {
+      console.log(user)
+      this.userData.id = user.userId
+      this.userData.username = user.username
+      this.userData.firstName = user.firstName
+      this.userData.lastName = user.lastName
+      this.userData.email = user.email
+      this.userData.phone = user.phone
+      this.userData.balance = user.balance
+      this.userData.image = user.image
+    },
+    updateData() {
+      const fd = new FormData()
+      fd.append('username', this.userData.username)
+      fd.append('firstName', this.userData.firstName)
+      fd.append('lastName', this.userData.lastName)
+      fd.append('email', this.userData.email)
+      fd.append('password', this.userData.password)
+      fd.append('phone', this.userData.phone)
+      fd.append('balance', this.userData.balance)
+      fd.append('image', this.userData.image)
+      const data = { id: this.userData.id, data: fd }
+      this.updateUser(data)
+        .then(res => {
+          this.clearData()
+          alert('Password successfully change')
+        })
+    },
+    clearData() {
+      this.userData.id = null
+      this.userData.username = ''
+      this.userData.firstName = ''
+      this.userData.Lastname = ''
+      this.userData.phone = ''
+      this.userData.image = null
+      this.active = !this.active
     }
   }
 

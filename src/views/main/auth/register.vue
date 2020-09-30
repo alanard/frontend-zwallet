@@ -14,7 +14,7 @@
                     </p>
                 </div>
             </div>
-            <div class="two p-5">
+            <div class="two pt-2 px-4">
                     <div class="container-text">
                         <h5>Start Accessing Banking Needs
                             With All Devices and All Platforms
@@ -27,13 +27,16 @@
                         all of that for you!
                     </p>
                     <form>
-                        <div class="form-group">
+                        <div class="form-group d-flex flex-column">
                             <i class="satu far fa-user fa-lg fa-fw" aria-hidden="true"></i>
                             <input type="text" class="name" placeholder="Enter your name" v-model="username">
+                            <span class="validation" v-if="username.length < 1">Username Required</span>
                         </div>
-                        <div class="form-group">
+                        <div class="form-group d-flex flex-column">
                             <i class="satu far fa-envelope fa-lg fa-fw"></i>
-                            <input type="email" placeholder="Enter your email" v-model="email">
+                            <!-- <input type="email" placeholder="Enter your email" v-model="email"> -->
+                            <input type="email" placeholder="Enter your email" v-model="$v.email.$model">
+                            <span v-if="$v.email.$error" class="validation">Email required</span>
                         </div>
                         <div class="form-group">
                             <div class="input-group">
@@ -45,6 +48,7 @@
                                         <i v-show="!display" class="dua fa fa-eye-slash"></i>
                                     </div>
                                 </div>
+                                <span class="validation" v-if="password.length >= 1 && password.length < 6">The password min 6 characters</span>
                             </div>
                         </div>
                         <button type="submit" class="btn" @click.prevent="submit">Sign Up</button>
@@ -56,6 +60,7 @@
 
 <script>
 import { mapActions } from 'vuex'
+import { required, minLength } from 'vuelidate/lib/validators'
 export default {
   data() {
     return {
@@ -65,6 +70,15 @@ export default {
       username: '',
       email: '',
       password: ''
+    }
+  },
+  validations: {
+    email: {
+      required
+    },
+    password: {
+      required,
+      minLength: minLength(6)
     }
   },
   methods: {
@@ -92,6 +106,13 @@ export default {
     height: 100vh;
 }
 .color { color: white;}
+/* Validation */
+.validation {
+  /* margin: auto; */
+  width: 80%;
+  text-align: center;
+  color: red;
+}
 
 /* ONE */
 .one {
@@ -142,7 +163,7 @@ input[type=password] {
   border-bottom: 1.5px solid rgba(169, 169, 169, 0.6);
 }
 .form-group {
-    margin: 60px 0px;
+    margin: 50px 0px;
 }
 .input-group-append {
     cursor: pointer;

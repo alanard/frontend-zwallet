@@ -1,7 +1,7 @@
 <template>
     <div>
         <div class="profile-wrapper">
-            <div class="profile" v-for="(user, index) in users" :key="index">
+            <div class="profile" v-for="user in users" :key="user.id">
                 <div class="profile-head">
                     <div class="img-wrapper">
                         <img src="../../../../assets/myprofile.png">
@@ -53,7 +53,10 @@ export default {
         username: '',
         firstName: '',
         lastName: '',
+        email: '',
+        password: '',
         phone: '',
+        balance: '',
         image: null
       }
     }
@@ -84,7 +87,10 @@ export default {
       this.userData.username = user.username
       this.userData.firstName = user.firstName
       this.userData.lastName = user.lastName
+      this.userData.email = user.email
+      this.userData.password = user.password
       this.userData.phone = user.phone
+      this.userData.balance = user.balance
       this.userData.image = user.image
       this.active = !this.active
     },
@@ -93,7 +99,10 @@ export default {
       fd.append('username', this.userData.username)
       fd.append('firstName', this.userData.firstName)
       fd.append('lastName', this.userData.lastName)
+      fd.append('email', this.userData.email)
+      fd.append('password', this.userData.password)
       fd.append('phone', this.userData.phone)
+      fd.append('balance', this.userData.balance)
       fd.append('image', this.userData.image)
       const data = { id: this.userData.id, data: fd }
       this.updateUser(data)

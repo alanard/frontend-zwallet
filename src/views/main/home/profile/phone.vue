@@ -20,9 +20,9 @@
             <div class="phone-body">
                 <div class="one" v-show="active">
                     <form>
-                        <div class="input-group">
+                        <div class="input-group" v-for="user in users" :key="user.id">
                             <i class="fas fa-phone-alt satu"></i>
-                            <input type="number" onKeyPress="if(this.value.length==13) return false;" placeholder="Enter your phone number">
+                            <input type="number" @click="edit(user)" onKeyPress="if(this.value.length==13) return false;" placeholder="Enter your phone number">
                         </div>
                         <div class="submit">
                             <button type="submit" class="btn" @click.prevent="addPhone">Add Phone Number</button>
@@ -53,11 +53,14 @@ export default {
   methods: {
     addPhone() {
       this.active = !this.active
+    },
+    edit(user) {
+      console.log(user)
     }
   },
   computed: {
     ...mapGetters({
-      users: 'get_user'
+      users: 'get_user_login'
     })
   }
 }

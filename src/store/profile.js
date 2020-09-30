@@ -2,15 +2,16 @@ import axios from 'axios'
 import router from '../router/index'
 
 const state = {
-  user: [
-    {
-      firstName: 'Robert',
-      lastName: 'Chandler',
-      phone: '+62 813-9387-7946',
-      email: 'pewdiepie1@gmail.com'
-    }
-  ],
+  // user: [
+  //   {
+  //     firstName: 'Robert',
+  //     lastName: 'Chandler',
+  //     phone: '+62 813-9387-7946',
+  //     email: 'pewdiepie1@gmail.com'
+  //   }
+  // ],
   userLogin: [],
+  userRegister: [],
   token: localStorage.getItem('token') || null,
   userId: localStorage.getItem('id') || null,
   username: localStorage.getItem('username') || null
@@ -18,8 +19,7 @@ const state = {
 
 const mutations = {
   REGISTER_USER(state, payload) {
-    console.log(payload)
-    state.username = payload
+    state.userRegister = payload
   },
   LOGIN_USER(state, payload) {
     console.log(payload)
@@ -74,16 +74,15 @@ const actions = {
     return new Promise((resolve, reject) => {
       axios.post(`${process.env.VUE_APP_BASE_URL}/api/v1/user/register`, payload)
         .then(res => {
-          console.log(res.data)
-          context.commit('REGISTER_USER', res.data.result.username)
-          localStorage.setItem('username', res.data.result.username)
-          // router.push('/login')
-          resolve(res.data.result)
+          console.log(res)
+          localStorage.setItem('registerId', res.data.result.insertId)
+          router.push('/pin')
+          resolve(res)
         })
         .catch(err => {
           console.log(err)
           if (err.response.status === 403) {
-            alert('username already exist')
+            alert('username or email already exist')
           }
         })
     })
