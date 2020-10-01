@@ -29,12 +29,6 @@
                         </div>
                     </div>
                     <div class="modalContent d-flex py-2">
-                        <label class="col-sm-3 col-form-label h6">Phone</label>
-                        <div class="col-sm-9">
-                            <input type="number" class="form-control shadow" v-model="data.phone">
-                        </div>
-                    </div>
-                    <div class="modalContent d-flex py-2">
                         <label class="col-sm-3 col-form-label h6">Photo</label>
                         <div class="col-sm-9">
                             <input type="file" class="form-control shadow" @change="onFileSelected">

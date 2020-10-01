@@ -25,7 +25,6 @@
 
 <script>
 import PincodeInput from 'vue-pincode-input'
-// import { mapActions } from 'vuex'
 import axios from 'axios'
 export default {
   components: {
