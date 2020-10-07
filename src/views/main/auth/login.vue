@@ -37,7 +37,7 @@
                             </div>
                             <p class="text-right mt-3" style="width:80%"><router-link to="/forgot">Forgot password?</router-link></p>
                         </div>
-                        <button type="submit" class="btn" @click.prevent="submit">Login</button>
+                        <button type="submit" class="btn btn-primary" @click.prevent="submit">Login</button>
                     </form>
                     <div style="width: 80%"><p class="text-center mt-2">Don't have an account?<router-link to="/register"><strong>Sign Up</strong></router-link></p></div>
             </div>
@@ -158,10 +158,8 @@ input[type=password] {
 button {
     width: 80%;
     height: 57px;
-    background: #DADADA;
     box-shadow: 0px 6px 75px rgba(100, 87, 87, 0.05);
     border-radius: 12px;
-    color: #88888F;
 }
 @media screen and (max-width: 992px) {
   .wrapper {

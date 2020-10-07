@@ -41,11 +41,13 @@
 
 <script>
 import { mapGetters, mapActions } from 'vuex'
+import mixins from '../../components/mixins/swal'
 import modal from './modal'
 export default {
   components: {
     modal
   },
+  mixins: [mixins],
   data() {
     return {
       active: false,
@@ -98,7 +100,7 @@ export default {
         .then(res => {
           this.clearData()
           this.getUserLogin()
-          alert('Data successfully updated')
+          this.success('center', 'success', 'Data successfully updated')
         })
     },
     clearData() {

@@ -1,5 +1,6 @@
 import axios from 'axios'
 import router from '../router/index'
+import Swal from 'sweetalert2/dist/sweetalert2.js'
 
 const state = {
   userLogin: [],
@@ -47,12 +48,8 @@ const actions = {
   },
   interceptorsResponse(context) {
     axios.interceptors.response.use(function(response) {
-      console.log(response)
       return response
     }, function(error) {
-      console.log(error)
-      console.log(error.response)
-      console.log(error.response.data.result.message)
       if (error.response.status === 401) {
         console.log(error.response)
         // if (error.response.data.result.message === 'invalid token') {
@@ -74,15 +71,17 @@ const actions = {
     return new Promise((resolve, reject) => {
       axios.post(`${process.env.VUE_APP_BASE_URL}/api/v1/user/register`, payload)
         .then(res => {
-          console.log(res)
           localStorage.setItem('registerId', res.data.result.insertId)
           router.push('/pin')
           resolve(res)
         })
         .catch(err => {
-          console.log(err)
           if (err.response.status === 403) {
-            alert('username or email already exist')
+            Swal.fire({
+              icon: 'error',
+              title: 'Oops...',
+              text: 'Username or Email already exist!'
+            })
           }
         })
     })
@@ -91,7 +90,6 @@ const actions = {
     return new Promise((resolve, reject) => {
       axios.post(`${process.env.VUE_APP_BASE_URL}/api/v1/user/login`, payload)
         .then(res => {
-          console.log(res.data.result)
           context.commit('LOGIN_USER', res.data.result)
           localStorage.setItem('token', res.data.result.token)
           localStorage.setItem('id', res.data.result.userId)
@@ -100,7 +98,11 @@ const actions = {
         })
         .catch(err => {
           if (err.response.status === 403) {
-            alert('email or password incorrect')
+            Swal.fire({
+              icon: 'error',
+              title: 'Oops...',
+              text: 'Email or Password incorrect!'
+            })
           }
         })
     })
@@ -115,7 +117,6 @@ const actions = {
     return new Promise((resolve, reject) => {
       axios.patch(`${process.env.VUE_APP_BASE_URL}/api/v1/user/${payload.id}`, payload.data)
         .then(res => {
-          console.log(res.data.result)
           resolve(res.data.result)
         })
     })
@@ -125,7 +126,6 @@ const actions = {
       const id = localStorage.getItem('id')
       axios.get(`${process.env.VUE_APP_BASE_URL}/api/v1/user/${id}`)
         .then(res => {
-          console.log(res.data.result[0])
           context.commit('USER_LOGGED', res.data.result[0])
         })
     })
@@ -135,7 +135,6 @@ const actions = {
       const id = localStorage.getItem('id')
       axios.get(`${process.env.VUE_APP_BASE_URL}/api/v1/phone/${id}`)
         .then(res => {
-          console.log(res.data.result[0].phoneNumber)
           context.commit('USER_PHONE_NUMBER', res.data.result[0].phoneNumber)
           resolve(res.data.result)
         })

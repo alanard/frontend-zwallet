@@ -14,7 +14,7 @@
                             <PincodeInput v-model="code" :length="length" />
                         </div>
                         <div class="submit mx-3">
-                            <button type="submit" class="btn" @click.prevent="changePin">Continue</button>
+                            <button type="submit" class="btn btn-primary" @click.prevent="changePin">Continue</button>
                         </div>
                     </form>
                 </div>
@@ -26,10 +26,12 @@
 <script>
 import PincodeInput from 'vue-pincode-input'
 import axios from 'axios'
+import mixins from '../../components/mixins/swal'
 export default {
   components: {
     PincodeInput
   },
+  mixins: [mixins],
   data() {
     return {
       code: '',
@@ -41,8 +43,9 @@ export default {
       const id = localStorage.getItem('id')
       axios.patch(`${process.env.VUE_APP_BASE_URL}/api/v1/pin/${id}`, { pin: this.code })
         .then(() => {
-          alert('Change Pin Success')
+          this.success('center', 'success', 'Change Pin Success')
           this.code = ''
+          this.$router.push('/home/profile')
         })
         .catch(err => console.log(err))
     }
@@ -77,7 +80,7 @@ div.vue-pincode-input-wrapper {
 }
 .btn {
     text-align: center;
-    background: #DADADA;
+    /* background: #DADADA; */
     box-shadow: 0px 6px 75px rgba(100, 87, 87, 0.05);
     border-radius: 12px;
     width: 100%;

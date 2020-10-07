@@ -38,7 +38,7 @@
                                 <PincodeInput v-model="code" :length="length" />
                             </div>
                         </div>
-                        <button type="submit" class="btn" v-show="showing" @click.prevent="createPin">Confirm</button>
+                        <button type="submit" class="btn btn-primary" v-show="showing" @click.prevent="createPin">Confirm</button>
                         <button type="submit" class="btn mt-5" v-show="!showing" style="background:#6379F4;color:#fff">Login Now</button>
                     </form>
             </div>
@@ -115,13 +115,6 @@ input:focus {
     margin: 60px 0px;
 }
 
-/* button {
-    width: 80%;
-    background: #DADADA;
-    box-shadow: 0px 6px 75px rgba(100, 87, 87, 0.05);
-    border-radius: 12px;
-    color: #88888F;
-} */
 /* PIN */
 .input-wrapper {
     margin: auto;
@@ -147,7 +140,6 @@ input[type=number] {
 }
 .btn {
     text-align: center;
-    background: #DADADA;
     box-shadow: 0px 6px 75px rgba(100, 87, 87, 0.05);
     border-radius: 12px;
     width: 75%;

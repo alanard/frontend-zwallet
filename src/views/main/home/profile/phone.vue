@@ -18,7 +18,7 @@
                 </div>
             </div>
             <div class="phone-body">
-                <div class="one" v-show="active">
+                <div class="one" v-show="!active">
                     <form>
                         <div class="input-group">
                             <i class="fas fa-phone-alt satu"></i>
@@ -30,7 +30,8 @@
                         </div>
                     </form>
                 </div>
-                <div class="two" v-show="!active">
+                <div class="two" v-show="active">
+                    <button class="btn-sm btn-primary" @click="addBtn" style="margin-left:40px">Add phone number</button>
                     <div class="phone-card" v-for="(phone, index) in phones" :key="index">
                         <div class="content-group d-flex justify-content-between">
                             <h5>{{phone.phoneNumber}}</h5>
@@ -51,14 +52,17 @@ import { mapActions, mapGetters } from 'vuex'
 export default {
   data() {
     return {
-      active: false,
+      active: true,
       phoneId: '',
       phone: null
     }
   },
   mixins: [mixins],
   methods: {
-    ...mapActions(['getUserLogin', 'getPhones']),
+    ...mapActions(['getPhones']),
+    addBtn() {
+      this.active = !this.active
+    },
     addPhone() {
       axios.post(`${process.env.VUE_APP_BASE_URL}/api/v1/phone`, {
         userId: localStorage.getItem('id'),
@@ -66,9 +70,8 @@ export default {
       })
         .then(() => {
           this.active = !this.active
-          //   this.getUserLogin()
           this.getPhones()
-          alert('add phone number success')
+          this.success('center', 'success', 'add phone number success')
         })
         .catch(err => console.log(err))
     },
@@ -119,7 +122,6 @@ i.dua {
     margin-top: 100px;
     padding-left: 120px;
     padding-right: 100px;
-    /* border: 1px solid black; */
 }
 input:focus {
     outline: none;
@@ -138,10 +140,8 @@ input[type=number] {
 .btn {
     width: 90%;
     height: 50px;
-    /* background: #DADADA; */
     box-shadow: 0px 6px 75px rgba(100, 87, 87, 0.05);
     border-radius: 12px;
-    /* color: #88888F; */
 }
 .phone-card {
     width: 90%;

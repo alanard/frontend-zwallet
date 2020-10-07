@@ -51,7 +51,7 @@
                                 <span class="validation" v-if="password.length >= 1 && password.length < 6">The password min 6 characters</span>
                             </div>
                         </div>
-                        <button type="submit" class="btn" @click.prevent="submit">Sign Up</button>
+                        <button type="submit" class="btn btn-primary" @click.prevent="submit">Sign Up</button>
                     </form>
                     <div style="width: 80%"><p class="text-center my-4">Already have an account?<router-link to="/login"><strong>Let's Login</strong></router-link></p></div>
             </div>
@@ -91,8 +91,7 @@ export default {
       const data = {
         username: this.username,
         email: this.email,
-        password: this.password,
-        image: 'https://github.com/Friemorn/BackEnd-PaymentApp-ZWallet/blob/master/www.freepik.comfree-iconmale-user-shadow_751026.htm%23page=1&query=user&position=2.png?raw=true'
+        password: this.password
       }
       this.register(data)
     },
@@ -177,10 +176,8 @@ input[type=password] {
 button {
     width: 80%;
     height: 57px;
-    background: #DADADA;
     box-shadow: 0px 6px 75px rgba(100, 87, 87, 0.05);
     border-radius: 12px;
-    color: #88888F;
 }
 @media screen and (max-width: 992px) {
   .wrapper {
