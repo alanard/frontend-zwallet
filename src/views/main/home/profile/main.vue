@@ -1,18 +1,19 @@
 <template>
     <div>
         <div class="profile-wrapper">
-            <div class="profile" v-for="user in users" :key="user.id">
+            <!-- <div class="profile" v-for="user in users" :key="user.id"> -->
+            <div class="profile">
                 <div class="profile-head">
                     <div class="img-wrapper">
-                        <img :src="user.image">
+                        <img :src="users.image">
                     </div>
                     <div class="edit my-2">
                         <img src="../../../../assets/edit-2.png">
-                        <span class="ml-1 pointer" @click="edit(user)">Edit</span>
+                        <span class="ml-1 pointer" @click="edit(users)">Edit</span>
                     </div>
                     <div class="profile-user">
-                        <h4>{{user.firstName}} {{user.lastName}}</h4>
-                        <span>{{user.phone}}</span>
+                        <h4>{{users.firstName}} {{users.lastName}}</h4>
+                        <span>{{users.phone}}</span>
                     </div>
                 </div>
                 <div class="profile-body">

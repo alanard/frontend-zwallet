@@ -4,6 +4,20 @@
   </div>
 </template>
 
+<script>
+import { mapActions } from 'vuex'
+export default {
+  methods: {
+    ...mapActions(['interceptorsRequest', 'interceptorsResponse'])
+  },
+  created() {
+    this.interceptorsRequest()
+  },
+  mounted() {
+    this.interceptorsResponse()
+  }
+}
+</script>
 <style>
 html,
 body {

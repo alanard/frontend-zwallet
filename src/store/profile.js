@@ -3,6 +3,8 @@ import router from '../router/index'
 
 const state = {
   userLogin: [],
+  userPhoneNumber: [],
+  userPhones: [],
   userRegister: [],
   token: localStorage.getItem('token') || null,
   userId: localStorage.getItem('id') || null,
@@ -23,6 +25,12 @@ const mutations = {
   },
   USER_LOGGED(state, payload) {
     state.userLogin = (payload)
+  },
+  USER_PHONE_NUMBER(state, payload) {
+    state.userPhoneNumber = payload
+  },
+  USER_PHONES(state, payload) {
+    state.userPhones = payload
   }
 }
 
@@ -117,9 +125,33 @@ const actions = {
       const id = localStorage.getItem('id')
       axios.get(`${process.env.VUE_APP_BASE_URL}/api/v1/user/${id}`)
         .then(res => {
-          console.log(res.data.result)
-          context.commit('USER_LOGGED', res.data.result)
+          console.log(res.data.result[0])
+          context.commit('USER_LOGGED', res.data.result[0])
         })
+    })
+  },
+  getPhoneNumber(context) {
+    return new Promise((resolve, reject) => {
+      const id = localStorage.getItem('id')
+      axios.get(`${process.env.VUE_APP_BASE_URL}/api/v1/phone/${id}`)
+        .then(res => {
+          console.log(res.data.result[0].phoneNumber)
+          context.commit('USER_PHONE_NUMBER', res.data.result[0].phoneNumber)
+          resolve(res.data.result)
+        })
+        .catch(err => console.log(err))
+    })
+  },
+  getPhones(context) {
+    return new Promise((resolve, reject) => {
+      const id = localStorage.getItem('id')
+      axios.get(`${process.env.VUE_APP_BASE_URL}/api/v1/phone/${id}`)
+        .then(res => {
+          console.log(res.data.result)
+          context.commit('USER_PHONES', res.data.result)
+          resolve(res.data.result)
+        })
+        .catch(err => console.log(err))
     })
   }
 }
@@ -133,6 +165,12 @@ const getters = {
   },
   get_user_login(state) {
     return state.userLogin
+  },
+  get_user_phone_number(state) {
+    return state.userPhoneNumber
+  },
+  get_user_phones(state) {
+    return state.userPhones
   }
 }
 export default {

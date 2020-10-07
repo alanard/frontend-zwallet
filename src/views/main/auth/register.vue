@@ -91,7 +91,8 @@ export default {
       const data = {
         username: this.username,
         email: this.email,
-        password: this.password
+        password: this.password,
+        image: 'https://github.com/Friemorn/BackEnd-PaymentApp-ZWallet/blob/master/www.freepik.comfree-iconmale-user-shadow_751026.htm%23page=1&query=user&position=2.png?raw=true'
       }
       this.register(data)
     },

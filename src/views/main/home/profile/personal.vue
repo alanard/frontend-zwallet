@@ -8,23 +8,25 @@
                     If you want to make changes on your information, ctextontact our support.
                 </p>
             </div>
-            <div class="card-body" v-for="(user, index) in users" :key="index">
-                <div class="user-info">
-                    <h6 style="color: #7A7886;">First Name</h6>
-                    <h5>{{user.firstName}}</h5>
-                </div>
-                <div class="user-info">
-                    <h6 style="color: #7A7886;">Last Name</h6>
-                    <h5>{{user.lastName}}</h5>
-                </div>
-                <div class="user-info">
-                    <h6 style="color: #7A7886;">Verified Email</h6>
-                    <h5>{{user.email}}</h5>
+            <div class="card-body">
+                <div class="personal">
+                    <div class="user-info">
+                        <h6 style="color: #7A7886;">First Name</h6>
+                        <h5>{{users.firstName}}</h5>
+                    </div>
+                    <div class="user-info">
+                        <h6 style="color: #7A7886;">Last Name</h6>
+                        <h5>{{users.lastName}}</h5>
+                    </div>
+                    <div class="user-info">
+                        <h6 style="color: #7A7886;">Verified Email</h6>
+                        <h5>{{users.email}}</h5>
+                    </div>
                 </div>
                 <div class="user-info">
                     <h6 style="color: #7A7886;">Phone Number</h6>
                     <div class="phone-group d-flex justify-content-between">
-                        <h5>{{user.phone}}</h5>
+                        <h5>{{phones}}</h5>
                         <span> <router-link to="/home/profile/phone">Manage</router-link></span>
                     </div>
                 </div>
@@ -37,16 +39,18 @@
 import { mapGetters, mapActions } from 'vuex'
 export default {
   name: 'personal',
-  mounted() {
+  async mounted() {
     this.getUserLogin()
+    await this.getPhoneNumber()
   },
   computed: {
     ...mapGetters({
-      users: 'get_user_login'
+      users: 'get_user_login',
+      phones: 'get_user_phone_number'
     })
   },
   methods: {
-    ...mapActions(['getUserLogin'])
+    ...mapActions(['getUserLogin', 'getPhoneNumber'])
   }
 }
 </script>

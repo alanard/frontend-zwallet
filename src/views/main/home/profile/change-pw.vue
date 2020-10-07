@@ -9,13 +9,14 @@
             </div>
             <div class="card-body">
                 <div class="input-wrapper">
-                    <form v-for="(user, index) in users" :key="index">
+                    <!-- <form v-for="(user, index) in users" :key="index"> -->
+                    <form>
                         <div class="form-group">
-                            <div class="input-group" @click="edit(user)">
+                            <div class="input-group">
                                 <i class="satu fa fa-lock fa-lg fa-fw" aria-hidden="true"></i>
-                                <input :type="type" placeholder="Current password" required>
+                                <input :type="type" placeholder="Current password">
                                 <div class="input-group-append" style="margin-left:-20px">
-                                    <div :class="{active:active}" @click="show">
+                                    <div @click="show">
                                         <i class="dua fa fa-eye" v-show="display"></i>
                                         <i v-show="!display" class="dua fa fa-eye-slash"></i>
                                     </div>
@@ -25,7 +26,7 @@
                         <div class="form-group">
                             <div class="input-group">
                                 <i class="satu fa fa-lock fa-lg fa-fw" aria-hidden="true"></i>
-                                <input :type="type2" placeholder="New password" required v-model="userData.password">
+                                <input :type="type2" placeholder="New password" v-model="userData.password">
                                 <div class="input-group-append" style="margin-left:-20px">
                                     <div @click="show2">
                                         <i class="dua fa fa-eye" v-show="display2"></i>
@@ -37,7 +38,7 @@
                         <div class="form-group">
                             <div class="input-group">
                                 <i class="satu fa fa-lock fa-lg fa-fw" aria-hidden="true"></i>
-                                <input :type="type3" placeholder="Repeat password" required>
+                                <input :type="type3" placeholder="Repeat password">
                                 <div class="input-group-append" style="margin-left:-20px">
                                     <div @click="show3">
                                         <i class="dua fa fa-eye" v-show="display3"></i>
@@ -46,7 +47,7 @@
                                 </div>
                             </div>
                         </div>
-                        <button type="submit" class="btn btn-block" @click.prevent="updateData">Change Password</button>
+                        <button type="submit" class="btn btn-primary btn-block" @click.prevent="updatePassword">Change Password</button>
                     </form>
                 </div>
             </div>
@@ -56,29 +57,23 @@
 
 <script>
 import { mapActions, mapGetters } from 'vuex'
+import mixins from '../../components/mixins/swal'
+import axios from 'axios'
 export default {
   name: 'changePw',
+  mixins: [mixins],
   data() {
     return {
       type: 'password',
       type2: 'password',
       type3: 'password',
-      active: false,
       pw: true,
       display: true,
       display2: true,
       display3: true,
       /* User update */
       userData: {
-        id: null,
-        username: '',
-        firstName: '',
-        lastName: '',
-        email: '',
-        password: '',
-        phone: '',
-        balance: '',
-        image: null
+        password: ''
       }
     }
   },
@@ -91,58 +86,31 @@ export default {
     })
   },
   methods: {
-    ...mapActions(['updateUser', 'getUserLogin']),
+    ...mapActions(['getUserLogin']),
     show() {
       this.type = this.type === 'password' ? 'text' : 'password'
-      this.active = !this.active
       this.display = !this.display
     },
     show2() {
       this.type2 = this.type2 === 'password' ? 'text' : 'password'
-      this.active = !this.active
       this.display2 = !this.display2
     },
     show3() {
       this.type3 = this.type3 === 'password' ? 'text' : 'password'
-      this.active = !this.active
       this.display3 = !this.display3
     },
-    edit(user) {
-      console.log(user)
-      this.userData.id = user.userId
-      this.userData.username = user.username
-      this.userData.firstName = user.firstName
-      this.userData.lastName = user.lastName
-      this.userData.email = user.email
-      this.userData.phone = user.phone
-      this.userData.balance = user.balance
-      this.userData.image = user.image
-    },
-    updateData() {
-      const fd = new FormData()
-      fd.append('username', this.userData.username)
-      fd.append('firstName', this.userData.firstName)
-      fd.append('lastName', this.userData.lastName)
-      fd.append('email', this.userData.email)
-      fd.append('password', this.userData.password)
-      fd.append('phone', this.userData.phone)
-      fd.append('balance', this.userData.balance)
-      fd.append('image', this.userData.image)
-      const data = { id: this.userData.id, data: fd }
-      this.updateUser(data)
+    updatePassword() {
+      const id = localStorage.getItem('id')
+      axios.patch(`${process.env.VUE_APP_BASE_URL}/api/v1/user/password/${id}`, { password: this.userData.password })
         .then(res => {
-          this.clearData()
-          alert('Password successfully change')
+          this.active = !this.active
+          this.success('center', 'success', 'Password changed')
         })
-    },
-    clearData() {
-      this.userData.id = null
-      this.userData.username = ''
-      this.userData.firstName = ''
-      this.userData.Lastname = ''
-      this.userData.phone = ''
-      this.userData.image = null
-      this.active = !this.active
+        .catch(err => {
+          if (err.response.status === 403) {
+            this.failed('Dont use old password')
+          }
+        })
     }
   }
 
@@ -199,8 +167,8 @@ input[type=password] {
 }
 .btn {
     height: 57px;
-    background: #DADADA;
-    box-shadow: 0px 6px 75px rgba(100, 87, 87, 0.05);
+    /* background: #DADADA; */
+    /* box-shadow: 0px 6px 75px rgba(100, 87, 87, 0.05); */
     border-radius: 12px;
 }
 </style>
