@@ -26,7 +26,7 @@
                 <div class="user-info">
                     <h6 style="color: #7A7886;">Phone Number</h6>
                     <div class="phone-group d-flex justify-content-between">
-                        <h5>{{phones}}</h5>
+                        <h5>{{setPhone}}</h5>
                         <span> <router-link to="/home/profile/phone">Manage</router-link></span>
                     </div>
                 </div>
@@ -47,7 +47,14 @@ export default {
     ...mapGetters({
       users: 'get_user_login',
       phones: 'get_user_phone_number'
-    })
+    }),
+    setPhone() {
+      if (this.phones.length === 0) {
+        return 'Not Set'
+      } else {
+        return this.phones
+      }
+    }
   },
   methods: {
     ...mapActions(['getUserLogin', 'getPhoneNumber'])
@@ -57,7 +64,6 @@ export default {
 
 <style scoped>
 .container {
-    /* width: 100%; */
     height: 130vh;
     background: #FFFFFF;
     box-shadow: 0px 4px 20px rgba(0, 0, 0, 0.05);
@@ -68,7 +74,6 @@ export default {
 }
 .user-info {
     width: 100%;
-    /* height: 92px; */
     margin: 20px 0;
     padding: 9px 15px;
     background: #FFFFFF;
