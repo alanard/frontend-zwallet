@@ -2,6 +2,8 @@ import Vue from 'vue'
 import Vuex from 'vuex'
 /* My Part (erlangga) */
 import Profile from './profile'
+import Transaction from './transaction'
+import History from './history'
 
 Vue.use(Vuex)
 
@@ -13,6 +15,8 @@ export default new Vuex.Store({
   actions: {
   },
   modules: {
-    Profile
+    Profile,
+    Transaction,
+    History
   }
 })

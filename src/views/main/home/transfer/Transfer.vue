@@ -3,67 +3,62 @@
     <div class="title">Search Receiver</div>
     <div class="content">
       <div class="search-content">
+        <!-- Search User For Transfer -->
         <i class="fas fa-search"></i
-        ><input type="text" placeholder="Search receiver here" />
+        ><input
+          type="text"
+          placeholder="Search receiver here"
+          v-on:keyup="setSearch"
+        />
       </div>
-      <div class="item-content" @click="linkToTransfer">
+      <div
+        class="item-content"
+        v-for="(user, index) in users"
+        :key="index"
+        @click="linkToTransfer"
+      >
         <div class="image">
-          <img src="../../../../assets/User/user2.png" alt="" />
+          <img :src="user.image" alt="" />
         </div>
         <div class="bio">
-          <div class="name">Samuel Suhi</div>
-          <div class="phone-number">+62 813-8492-9994</div>
-        </div>
-      </div>
-      <div class="item-content" @click="linkToTransfer">
-        <div class="image">
-          <img src="../../../../assets/User/user2.png" alt="" />
-        </div>
-        <div class="bio">
-          <div class="name">Samuel Suhi</div>
-          <div class="phone-number">+62 813-8492-9994</div>
-        </div>
-      </div>
-      <div class="item-content" @click="linkToTransfer">
-        <div class="image">
-          <img src="../../../../assets/User/user2.png" alt="" />
-        </div>
-        <div class="bio">
-          <div class="name">Samuel Suhi</div>
-          <div class="phone-number">+62 813-8492-9994</div>
-        </div>
-      </div>
-      <div class="item-content" @click="linkToTransfer">
-        <div class="image">
-          <img src="../../../../assets/User/user2.png" alt="" />
-        </div>
-        <div class="bio">
-          <div class="name">Samuel Suhi</div>
-          <div class="phone-number">+62 813-8492-9994</div>
-        </div>
-      </div>
-      <div class="item-content" @click="linkToTransfer">
-        <div class="image">
-          <img src="../../../../assets/User/user2.png" alt="" />
-        </div>
-        <div class="bio">
-          <div class="name">Samuel Suhi</div>
-          <div class="phone-number">+62 813-8492-9994</div>
+          <div class="name">{{ user.username }}</div>
+          <div class="phone-number">{{ user.phone }}</div>
         </div>
       </div>
     </div>
+    <Pagination :data="pagination" />
   </div>
 </template>
 
 <script>
+import Pagination from '../../../../components/_base/Pagination'
+import { mapGetters, mapActions } from 'vuex'
 export default {
   name: 'Transfer',
   data() {
     return {}
   },
+  components: {
+    Pagination
+  },
+  mounted() {
+    this.getAllUser()
+  },
+  computed: {
+    ...mapGetters({
+      users: 'get_all_user',
+      pagination: 'pagination'
+    })
+  },
   methods: {
+    ...mapActions(['getAllUser']),
     linkToTransfer() {
       this.$router.push({ path: '/home/InputTransfer' })
+    },
+    setSearch(e) {
+      // console.log(e.target.value)
+      const url = `search=${e.target.value}&`
+      this.getAllUser(url)
     }
   }
 }
@@ -76,7 +71,12 @@ export default {
   box-shadow: 0px 4px 20px rgba(0, 0, 0, 0.05);
   border-radius: 25px;
   height: 130vh;
+  overflow: scroll;
   font-family: 'Nunito Sans', sans-serif;
+}
+
+.transfer::-webkit-scrollbar {
+  display: none;
 }
 
 .transfer .title {
@@ -151,6 +151,11 @@ export default {
 .transfer .item-content .image {
   /* border: 1px solid black; */
   flex: 0.4;
+}
+
+.transfer .item-content .image img {
+  width: 50px;
+  height: 50px;
 }
 
 .transfer .item-content .bio {

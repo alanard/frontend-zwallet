@@ -30,26 +30,27 @@ const mutations = {
     state.token = null
   },
   USER_LOGGED(state, payload) {
+    console.log(payload)
     state.userLogin = (payload)
   }
 }
 
 const actions = {
   interceptorsRequest(context) {
-    axios.interceptors.request.use(function(config) {
+    axios.interceptors.request.use(function (config) {
       // Do something before request is sent
       config.headers.Authorization = `Bearer ${context.state.token}`
       return config
-    }, function(error) {
+    }, function (error) {
       // Do something with request error
       return Promise.reject(error)
     })
   },
   interceptorsResponse(context) {
-    axios.interceptors.response.use(function(response) {
+    axios.interceptors.response.use(function (response) {
       console.log(response)
       return response
-    }, function(error) {
+    }, function (error) {
       console.log(error)
       console.log(error.response)
       console.log(error.response.data.result.message)
@@ -114,8 +115,8 @@ const actions = {
   },
   getUserLogin(context) {
     return new Promise((resolve, reject) => {
-      const id = localStorage.getItem('id')
-      axios.get(`${process.env.VUE_APP_BASE_URL}/api/v1/user/${id}`)
+      // const id = localStorage.getItem('id')
+      axios.get('http://localhost:3000/api/v1/user/3')
         .then(res => {
           console.log(res.data.result)
           context.commit('USER_LOGGED', res.data.result)
@@ -132,7 +133,11 @@ const getters = {
     return state.token !== null
   },
   get_user_login(state) {
+    console.log(state.userLogin)
     return state.userLogin
+  },
+  get_user_by_user_id(state) {
+    return state.userId
   }
 }
 export default {

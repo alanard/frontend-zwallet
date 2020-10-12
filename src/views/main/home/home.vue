@@ -5,13 +5,15 @@
       <!-- Navbar -->
       <div class="col-md-12 navbar">
         <div class="brand">Zwallet</div>
-        <div class="myprofile">
+        <div class="myprofile" v-for="(user, index) in users" :key="index">
           <div class="image">
             <img src="../../../assets/myprofile.png" />
           </div>
           <div class="bio">
-            <div class="name">Robert Ard Junior</div>
-            <div class="phoneNumber">+62 87789 9988 7733</div>
+            <div class="name">
+              {{ user.firstName }} &nbsp; {{ user.lastName }}
+            </div>
+            <div class="phoneNumber">{{ user.phone }}</div>
           </div>
           <i class="far fa-bell" @click="ModalActive"></i>
           <!-- Modal Notification -->
@@ -62,6 +64,7 @@
 
 <script>
 import ModalNotification from '../../../components/_base/ModalNotification'
+import { mapGetters } from 'vuex'
 export default {
   name: 'Home',
   data() {
@@ -89,6 +92,11 @@ export default {
     toProfile() {
       this.$router.push('/home/profile')
     }
+  },
+  computed: {
+    ...mapGetters({
+      users: 'get_user_login'
+    })
   }
 }
 </script>

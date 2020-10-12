@@ -5,8 +5,10 @@
     <div class="navbar">
       <div class="brand">Zwallet</div>
       <div class="join">
-        <button class="btn btn-primary login">Login</button>
-        <button class="btn btn-primary signup">Sign Up</button>
+        <button class="btn btn-primary login" @click="LinkLogin">Login</button>
+        <button class="btn btn-primary signup" @click="LinkRegister">
+          Sign Up
+        </button>
       </div>
     </div>
     <!-- ================================================================= -->
@@ -34,7 +36,15 @@
 
 <script>
 export default {
-  name: 'ContainerOne'
+  name: 'ContainerOne',
+  methods: {
+    LinkLogin() {
+      this.$router.push({ path: '/login' })
+    },
+    LinkRegister() {
+      this.$router.push({ path: '/register' })
+    }
+  }
 }
 </script>
 

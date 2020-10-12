@@ -5,8 +5,8 @@
     <div class="nav-dashboard">
       <div class="item-left">
         <div class="status">Balance</div>
-        <div class="saldo">Rp120.000</div>
-        <div class="phone-number">+62 813-9387-7946</div>
+        <div class="saldo">Rp.{{ getUserlogin[0].phone }}</div>
+        <div class="phone-number"></div>
       </div>
       <div class="item-right">
         <button class="btn btn-primary" @click="linkToTransfer">
@@ -42,42 +42,30 @@
       <div class="main-right">
         <div class="transaction-history-title">
           <div class="title">Transaction History</div>
-          <div class="see-all">See all</div>
+          <div class="see-all" @click="linkHistory">See all</div>
         </div>
-        <div class="transaction-history">
+        <div
+          class="transaction-history"
+          v-for="(history, index) in getTransaction"
+          :key="index"
+        >
           <div class="people">
-            <img src="../../../../assets/User/friend.png" alt="" />
+            <img :src="history.image" alt="" />
             <div class="bio">
-              <div class="name">Casandra Ice</div>
+              <div
+                class="name"
+                v-if="getTransactionByUserId === history.senderid"
+              >
+                {{ history.receiverName }}
+              </div>
+              <div class="name" v-else>
+                {{ history.senderName }}
+              </div>
               <div class="method">Transfer</div>
             </div>
           </div>
           <div class="total-method">
-            <div class="method">+Rp150.000</div>
-          </div>
-        </div>
-        <div class="transaction-history">
-          <div class="people">
-            <img src="../../../../assets/User/friend.png" alt="" />
-            <div class="bio">
-              <div class="name">Netflix</div>
-              <div class="method">Subscription</div>
-            </div>
-          </div>
-          <div class="total-method">
-            <div class="method">-Rp149.000</div>
-          </div>
-        </div>
-        <div class="transaction-history">
-          <div class="people">
-            <img src="../../../../assets/User/friend.png" alt="" />
-            <div class="bio">
-              <div class="name">Casandra Ice</div>
-              <div class="method">Transfer</div>
-            </div>
-          </div>
-          <div class="total-method">
-            <div class="method">+Rp150.000</div>
+            <div class="method">{{ history.amount }}</div>
           </div>
         </div>
       </div>
@@ -86,12 +74,27 @@
 </template>
 
 <script>
+import { mapGetters, mapActions } from 'vuex'
 export default {
   name: 'Dashboard',
   methods: {
+    ...mapActions(['getTransactionById', 'get_user_by_user_id']),
     linkToTransfer() {
       this.$router.push({ path: '/home/transfer' })
+    },
+    linkHistory() {
+      this.$router.push({ path: '/home/history' })
     }
+  },
+  computed: {
+    ...mapGetters({
+      getTransaction: 'get_transaction',
+      getTransactionByUserId: 'get_user_by_user_id',
+      getUserlogin: 'get_user_login'
+    })
+  },
+  mounted() {
+    this.getTransactionById()
   }
 }
 </script>
