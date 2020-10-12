@@ -26,25 +26,27 @@
                         <div class="form-group">
                             <div class="input-group">
                                 <i class="satu fa fa-lock fa-lg fa-fw" aria-hidden="true"></i>
-                                <input :type="type2" placeholder="New password" v-model="userData.password">
+                                <input :type="type2" placeholder="New password" v-model="password">
                                 <div class="input-group-append" style="margin-left:-20px">
                                     <div @click="show2">
                                         <i class="dua fa fa-eye" v-show="display2"></i>
                                         <i v-show="!display2" class="dua fa fa-eye-slash"></i>
                                     </div>
                                 </div>
+                                <span class="validation" v-if="password.length >= 1 && password.length < 6">The password min 6 characters</span>
                             </div>
                         </div>
                         <div class="form-group">
                             <div class="input-group">
                                 <i class="satu fa fa-lock fa-lg fa-fw" aria-hidden="true"></i>
-                                <input :type="type3" placeholder="Repeat password">
+                                <input :type="type3" placeholder="Repeat password" v-model="$v.repeatPassword.$model">
                                 <div class="input-group-append" style="margin-left:-20px">
                                     <div @click="show3">
                                         <i class="dua fa fa-eye" v-show="display3"></i>
                                         <i v-show="!display3" class="dua fa fa-eye-slash"></i>
                                     </div>
                                 </div>
+                                <span class="validation" v-if="!$v.repeatPassword.sameAsPassword">Password not same</span>
                             </div>
                         </div>
                         <button type="submit" class="btn btn-primary btn-block" @click.prevent="updatePassword">Change Password</button>
@@ -59,6 +61,7 @@
 import { mapActions, mapGetters } from 'vuex'
 import mixins from '../../components/mixins/swal'
 import axios from 'axios'
+import { required, minLength, sameAs } from 'vuelidate/lib/validators'
 export default {
   name: 'changePw',
   mixins: [mixins],
@@ -72,9 +75,22 @@ export default {
       display2: true,
       display3: true,
       /* User update */
-      userData: {
-        password: ''
-      }
+      //   userData: {
+      //     password: '',
+      //     repeatPassword: ''
+      //   }
+      password: '',
+      repeatPassword: ''
+    }
+  },
+  validations: {
+    password: {
+      required,
+      minLength: minLength(6)
+    },
+    repeatPassword: {
+      minLength: minLength(6),
+      sameAsPassword: sameAs('password')
     }
   },
   mounted() {
@@ -101,7 +117,7 @@ export default {
     },
     updatePassword() {
       const id = localStorage.getItem('id')
-      axios.patch(`${process.env.VUE_APP_BASE_URL}/api/v1/user/password/${id}`, { password: this.userData.password })
+      axios.patch(`${process.env.VUE_APP_BASE_URL}/api/v1/user/password/${id}`, { password: this.password })
         .then(res => {
           this.active = !this.active
           this.success('center', 'success', 'Password changed')
@@ -127,6 +143,13 @@ export default {
 }
 .text-wrapper {
     width: 45%;
+}
+
+/* Validation */
+.validation {
+  width: 100%;
+  text-align: center;
+  color: red;
 }
 
 .input-wrapper {
