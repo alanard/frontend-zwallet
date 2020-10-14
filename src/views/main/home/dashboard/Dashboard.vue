@@ -157,6 +157,7 @@ export default {
   async created() {
     const { data } = await axios.get(`${process.env.VUE_APP_BASE_URL}/api/v1/transaction/week/${localStorage.getItem('id')}`)
     data.result.forEach(d => {
+      console.log(d)
       this.date.push(d.days)
       this.amount.push(d.amount)
     })
