@@ -4,7 +4,8 @@ import axios from 'axios'
 const state = {
   user: [],
   currentPage: 1,
-  pagination: null
+  pagination: null,
+  receiver: []
 }
 
 const mutations = {
@@ -13,6 +14,15 @@ const mutations = {
   },
   setPagination(state, payload) {
     state.pagination = payload
+  },
+  setReceiver(state, payload) {
+    console.log(payload)
+    const data = payload
+    state.receiver.push(data)
+    console.log(data)
+  },
+  setReceiverNull(state) {
+    state.receiver = []
   }
 }
 
@@ -32,17 +42,6 @@ const actions = {
         })
     })
   }
-  // handleSearch(context, payload) {
-  //   return new Promise((resolve, reject) => {
-  //     axios.get(`${process.env.VUE_APP_BASE_URL}/api/v1/user?search=${payload}&page=1&limit=2`)
-  //       .then((res) => {
-  //         resolve(res.data.result)
-  //         context.commit('setUser', res.data.result)
-  //       }).catch((err) => {
-  //         reject(err)
-  //       })
-  //   })
-  // }
 }
 
 const getters = {
@@ -51,6 +50,10 @@ const getters = {
   },
   pagination(state) {
     return state.pagination
+  },
+  getReceiver(state) {
+    console.log(state.receiver)
+    return state.receiver
   }
 }
 export default {

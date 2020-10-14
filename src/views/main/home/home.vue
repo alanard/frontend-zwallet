@@ -13,7 +13,7 @@
             <div class="name">
               {{ user.firstName }} &nbsp; {{ user.lastName }}
             </div>
-            <div class="phoneNumber">{{ user.phone }}</div>
+            <div class="phoneNumber">{{ user.phoneNumber }}</div>
           </div>
           <i class="far fa-bell" @click="ModalActive"></i>
           <!-- Modal Notification -->
@@ -28,20 +28,30 @@
       <!-- aside left -->
       <div class="col-md-3 aside-left">
         <div class="row">
-          <div class="item">
-            <i class="fas fa-border-none"></i
-            ><span @click="linkToDashboard">Dashboard</span>
-          </div>
-          <div class="item">
-            <i class="fas fa-arrow-up"></i
-            ><span @click="linkToTransfer">Transfer</span>
-          </div>
-          <div class="item">
-            <i class="fas fa-plus"></i><span @click="linkToFaq">Top Up</span>
-          </div>
-          <div class="item">
-            <i class="far fa-user"></i><span @click="toProfile">Profile</span>
-          </div>
+            <div class="item">
+              <router-link class="router-link" to="/home">
+                  <i class="fas fa-border-none"></i>
+                  <span>Dashboard</span>
+              </router-link>
+            </div>
+            <div class="item">
+              <router-link class="router-link" to="/home/transfer">
+                  <i class="fas fa-arrow-up"></i>
+                  <span>Transfer</span>
+              </router-link>
+            </div>
+            <div class="item">
+              <router-link class="router-link" to="/home/faq">
+                  <i class="fas fa-plus"></i>
+                  <span>Top Up</span>
+              </router-link>
+            </div>
+            <div class="item">
+              <router-link class="router-link" to="/home/profile">
+                  <i class="far fa-user"></i>
+                  <span>Profile</span>
+              </router-link>
+            </div>
         </div>
       </div>
       <!-- ==================================== -->
@@ -78,19 +88,6 @@ export default {
   methods: {
     ModalActive() {
       this.isShow = !this.isShow
-    },
-    linkToDashboard() {
-      this.$router.push({ path: '/home' })
-    },
-    linkToFaq() {
-      this.$router.push({ path: '/home/faq' })
-    },
-    linkToTransfer() {
-      this.$router.push({ path: '/home/transfer' })
-    },
-    /* My part (Erlangga) */
-    toProfile() {
-      this.$router.push('/home/profile')
     }
   },
   computed: {
@@ -102,9 +99,11 @@ export default {
 </script>
 
 <style scoped>
+/* .router-link {
+  display: block;
+} */
 .container-fluid {
   background: rgba(135, 150, 238, 0.2);
-  height: 1000px;
 }
 
 /* ========================================================================= */

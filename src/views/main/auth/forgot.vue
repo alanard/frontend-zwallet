@@ -49,8 +49,8 @@
                                 </div>
                             </div>
                         </div>
-                        <button type="submit" class="btn" @click.prevent="showing = !showing" v-show="showing">Confirm</button>
-                        <button type="submit" class="btn" v-show="!showing">Reset Password</button>
+                        <button type="submit" class="btn btn-primary" @click.prevent="showing = !showing" v-show="showing">Confirm</button>
+                        <button type="submit" class="btn btn-primary" v-show="!showing">Reset Password</button>
                     </form>
             </div>
     </div>
@@ -140,10 +140,8 @@ input[type=password] {
 button {
     width: 80%;
     height: 57px;
-    background: #DADADA;
     box-shadow: 0px 6px 75px rgba(100, 87, 87, 0.05);
     border-radius: 12px;
-    color: #88888F;
 }
 @media screen and (max-width: 992px) {
   .wrapper {

@@ -16,32 +16,37 @@
                         all of that for you!
                     </p>
                     <form>
-                        <div class="form-group">
+                        <div class="form-group d-flex flex-column">
                             <i class="satu far fa-envelope fa-lg fa-fw"></i>
-                            <input type="email" placeholder="Enter your email" v-model="email">
+                            <!-- <input type="email" placeholder="Enter your email" v-model="email"> -->
+                            <input type="email" placeholder="Enter your email" v-model="$v.email.$model">
+                            <span v-if="$v.email.$error" class="validation">Email required</span>
                         </div>
                         <div class="form-group">
                             <div class="input-group">
                                 <i class="satu fa fa-lock fa-lg fa-fw" aria-hidden="true"></i>
-                                <input :type="type" placeholder="Enter your password" v-model="password">
+                                <!-- <input :type="type" placeholder="Enter your password" v-model="password"> -->
+                                <input :type="type" placeholder="Enter your password" v-model="$v.password.$model">
                                 <div class="input-group-append" style="margin-left:-40px">
                                     <div @click="show">
                                         <i v-show="display" class="fa fa-eye"></i>
                                         <i v-show="!display" class="dua fa fa-eye-slash"></i>
                                     </div>
                                 </div>
+                                <span v-if="$v.password.$error" class="validation">Password required</span>
                             </div>
-                            <p class="text-right my-3" style="width:80%"><router-link to="/forgot">Forgot password?</router-link></p>
+                            <p class="text-right mt-3" style="width:80%"><router-link to="/forgot">Forgot password?</router-link></p>
                         </div>
-                        <button type="submit" class="btn" @click.prevent="submit">Login</button>
+                        <button type="submit" class="btn btn-primary" @click.prevent="submit">Login</button>
                     </form>
-                    <div style="width: 80%"><p class="text-center my-4">Don't have an account?<router-link to="/register"><strong>Sign Up</strong></router-link></p></div>
+                    <div style="width: 80%"><p class="text-center mt-2">Don't have an account?<router-link to="/register"><strong>Sign Up</strong></router-link></p></div>
             </div>
     </div>
 </template>
 
 <script>
 import { mapActions } from 'vuex'
+import { required } from 'vuelidate/lib/validators'
 import leftSide from './side'
 export default {
   components: {
@@ -54,6 +59,14 @@ export default {
       display: true,
       email: '',
       password: ''
+    }
+  },
+  validations: {
+    email: {
+      required
+    },
+    password: {
+      required
     }
   },
   methods: {
@@ -80,6 +93,12 @@ export default {
     height: 100vh;
 }
 .color { color: white;}
+/* Validation */
+.validation {
+  width: 80%;
+  text-align: center;
+  color: red;
+}
 
 /* ONE */
 .one {
@@ -139,10 +158,8 @@ input[type=password] {
 button {
     width: 80%;
     height: 57px;
-    background: #DADADA;
     box-shadow: 0px 6px 75px rgba(100, 87, 87, 0.05);
     border-radius: 12px;
-    color: #88888F;
 }
 @media screen and (max-width: 992px) {
   .wrapper {

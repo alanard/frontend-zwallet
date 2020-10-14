@@ -2,43 +2,118 @@
   <div class="input-transfer">
     <div class="title">Transfer Money</div>
     <div class="content">
-      <div class="item-content" @click="linkToTransfer">
+      <div class="item-content">
         <div class="image">
-          <img src="../../../../assets/User/user2.png" alt="" />
+          <img :src="getReceiver[0].image" alt="" />
         </div>
         <div class="bio">
-          <div class="name">Samuel Suhi</div>
-          <div class="phone-number">+62 813-8492-9994</div>
+          <div class="name">{{ getReceiver[0].username}}</div>
+          <div class="phone-number">{{ getReceiver[0].phoneNumber }}</div>
         </div>
       </div>
       <div class="title-content">
         Type the amount you want to transfer and then <br />
         press continue to the next steps.
       </div>
-      <div class="transfer-total"><input type="text" placeholder="0.00" /></div>
-      <div class="available-transfer">Rp120.000 Available</div>
+      <div class="transfer-total"><input type="number" v-model="amount" placeholder="0.00" /></div>
+      <div class="available-transfer">{{ get_user_login.balance }} Available</div>
       <div class="notes">
         <i class="fas fa-pen"></i
-        ><input type="text" placeholder="Add some notes" />
+        ><input type="text" v-model="notes" placeholder="Add some notes" />
         <hr />
       </div>
-      <div class="button btn btn-primary" @click="linkConfirmationtransfer">
+      <div class="button btn btn-primary" @click="showModalPin">
         Continue
       </div>
     </div>
+    <ModalPin v-show="isShow"/>
   </div>
 </template>
 
 <script>
+import axios from 'axios'
+import ModalPin from '../../../../components/_base/ModalPin'
+import { mapGetters } from 'vuex'
 export default {
   name: 'InputTransfer',
   data() {
-    return {}
+    return {
+      notes: '',
+      amount: '',
+      isShow: false
+    }
+  },
+  components: {
+    ModalPin
   },
   methods: {
+    showModalPin() {
+      this.isShow = !this.isShow
+    },
     linkConfirmationtransfer() {
       this.$router.push({ path: '/home/confirmationtransfer' })
+    },
+    Transfer() {
+      this.TransactionIn()
+      this.TransactionOut()
+      this.balanceIn()
+      this.balanceOut()
+    },
+    TransactionOut() {
+      axios.post(`${process.env.VUE_APP_BASE_URL}/api/v1/transaction`, {
+        userId: this.get_user_login[0].userId,
+        senderId: this.get_user_login[0].userId,
+        senderName: this.get_user_login[0].username,
+        receiverId: this.getReceiver[0].userId,
+        receiverName: this.getReceiver[0].username,
+        amount: this.amount,
+        statusId: '1',
+        notes: this.notes
+      })
+        .then((res) => {
+          console.log(res)
+        }).catch((err) => {
+          console.log(err)
+        })
+    },
+    TransactionIn() {
+      axios.post(`${process.env.VUE_APP_BASE_URL}/api/v1/transaction`, {
+        userId: this.getReceiver[0].userId,
+        senderId: this.get_user_login[0].userId,
+        senderName: this.get_user_login[0].username,
+        receiverId: this.getReceiver[0].userId,
+        receiverName: this.getReceiver[0].username,
+        amount: this.amount,
+        statusId: '1',
+        notes: this.notes
+      })
+        .then((res) => {
+          console.log(res)
+        }).catch((err) => {
+          console.log(err)
+        })
+    },
+    balanceSender() {
+      return this.get_user_login[0].balance - this.amount
+    },
+    balanceReceiver() {
+      const balanceReceiver = parseInt(this.getReceiver[0].balance) + parseInt(this.amount)
+      console.log(balanceReceiver)
+      return balanceReceiver
+    },
+    balanceIn() {
+      axios.patch(`${process.env.VUE_APP_BASE_URL}/api/v1/user/balance/${this.getReceiver[0].userId}`, {
+        balance: this.balanceReceiver()
+      })
+    },
+    balanceOut() {
+      axios.patch(`${process.env.VUE_APP_BASE_URL}/api/v1/user/balance/${this.get_user_login[0].userId}`, {
+        balance: this.balanceSender()
+      })
     }
+  },
+  computed: {
+    ...mapGetters(['getReceiver', 'get_user_login'])
   }
 }
 </script>
@@ -87,6 +162,14 @@ export default {
 .input-transfer .item-content .image {
   /* border: 1px solid black; */
   flex: 0.4;
+}
+
+.input-transfer .item-content .image img {
+  /* border: 1px solid black; */
+  height: 60px;
+  width: 60px;
+
+  border-radius: 10px;
 }
 
 .input-transfer .item-content .bio {

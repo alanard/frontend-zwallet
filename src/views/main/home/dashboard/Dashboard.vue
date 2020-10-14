@@ -5,8 +5,8 @@
     <div class="nav-dashboard">
       <div class="item-left">
         <div class="status">Balance</div>
-        <div class="saldo">Rp.{{ getUserlogin[0].phone }}</div>
-        <div class="phone-number"></div>
+        <!-- <div class="saldo">Rp. {{ getUserlogin[0].balance }}</div> -->
+        <!-- <div class="phone-number">{{ getUserlogin[0].phoneNumber }}</div> -->
       </div>
       <div class="item-right">
         <button class="btn btn-primary" @click="linkToTransfer">
@@ -78,7 +78,7 @@ import { mapGetters, mapActions } from 'vuex'
 export default {
   name: 'Dashboard',
   methods: {
-    ...mapActions(['getTransactionById', 'get_user_by_user_id']),
+    ...mapActions(['getTransactionById', 'get_user_login', 'getPhoneNumber']),
     linkToTransfer() {
       this.$router.push({ path: '/home/transfer' })
     },
@@ -89,20 +89,22 @@ export default {
   computed: {
     ...mapGetters({
       getTransaction: 'get_transaction',
-      getTransactionByUserId: 'get_user_by_user_id',
-      getUserlogin: 'get_user_login'
+      getTransactionByUserId: 'get_user_login',
+      getUserlogin: 'get_user_login',
+      get_user_phone_number: 'get_user_phone_number'
     })
   },
   mounted() {
     this.getTransactionById()
+    this.getPhoneNumber()
   }
 }
 </script>
 
 <style scoped>
-.dashboard {
-  /* border: 1px solid black; */
-}
+/* .dashboard {
+  border: 1px solid black;
+} */
 
 /* ============================================================================= */
 /* Nav-dashboard */

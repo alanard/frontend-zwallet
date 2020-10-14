@@ -43,33 +43,33 @@ const routes = [
       },
       {
         path: 'faq',
-        name: Faq,
+        // name: Faq,
         component: Faq
       },
       /* My Part (erlangga) */
       {
         path: 'transfer',
-        name: Transfer,
+        // name: Transfer,
         component: Transfer
       },
       {
         path: 'inputtransfer',
-        name: InputTransfer,
+        // name: InputTransfer,
         component: InputTransfer
       },
       {
         path: 'confirmationtransfer',
-        name: ConfirmationTransfer,
+        // name: ConfirmationTransfer,
         component: ConfirmationTransfer
       },
       {
         path: 'transfersuccess',
-        name: TransferSuccess,
+        // name: TransferSuccess,
         component: TransferSuccess
       },
       {
         path: 'history',
-        name: History,
+        // name: History,
         component: History
       },
       {

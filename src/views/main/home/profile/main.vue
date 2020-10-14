@@ -1,18 +1,19 @@
 <template>
     <div>
         <div class="profile-wrapper">
-            <div class="profile" v-for="(user, index) in users" :key="index">
+            <!-- <div class="profile" v-for="user in users" :key="user.id"> -->
+            <div class="profile">
                 <div class="profile-head">
                     <div class="img-wrapper">
-                        <img src="../../../../assets/myprofile.png">
+                        <img :src="users.image">
                     </div>
                     <div class="edit my-2">
                         <img src="../../../../assets/edit-2.png">
-                        <span class="ml-1">Edit</span>
+                        <span class="ml-1 pointer" @click="edit(users)">Edit</span>
                     </div>
                     <div class="profile-user">
-                        <h4>{{user.firstName}} {{user.lastName}}</h4>
-                        <span>{{user.phone}}</span>
+                        <h4>{{users.firstName}} {{users.lastName}}</h4>
+                        <span>{{users.phone}}</span>
                     </div>
                 </div>
                 <div class="profile-body">
@@ -33,24 +34,42 @@
                     </div>
                 </div>
             </div>
+            <modal :data="userData" v-show="active" @close="toggle" @fire-event="updateData" />
         </div>
     </div>
 </template>
 
 <script>
 import { mapGetters, mapActions } from 'vuex'
+import mixins from '../../components/mixins/swal'
+import modal from './modal'
 export default {
+  components: {
+    modal
+  },
+  mixins: [mixins],
+  data() {
+    return {
+      active: false,
+      userData: {
+        id: null,
+        username: '',
+        firstName: '',
+        lastName: '',
+        image: null
+      }
+    }
+  },
   mounted() {
     this.getUserLogin()
   },
   computed: {
     ...mapGetters({
-    //   users: 'get_user',
       users: 'get_user_login'
     })
   },
   methods: {
-    ...mapActions(['logout', 'getUserLogin']),
+    ...mapActions(['logout', 'getUserLogin', 'updateUser']),
     toPersonal() {
       this.$router.push('/home/profile/personal')
     },
@@ -59,6 +78,41 @@ export default {
     },
     toChangePIN() {
       this.$router.push('/home/profile/pin')
+    },
+    edit(user) {
+      console.log(user)
+      this.userData.id = user.userId
+      this.userData.username = user.username
+      this.userData.firstName = user.firstName
+      this.userData.lastName = user.lastName
+      this.userData.image = user.image
+      this.active = !this.active
+    },
+    updateData() {
+      const fd = new FormData()
+      fd.append('username', this.userData.username)
+      fd.append('firstName', this.userData.firstName)
+      fd.append('lastName', this.userData.lastName)
+      fd.append('image', this.userData.image)
+      const data = { id: this.userData.id, data: fd }
+      this.updateUser(data)
+        .then(res => {
+          this.clearData()
+          this.getUserLogin()
+          this.success('center', 'success', 'Data successfully updated')
+        })
+    },
+    clearData() {
+      this.userData.id = null
+      this.userData.username = ''
+      this.userData.firstName = ''
+      this.userData.Lastname = ''
+      this.userData.phone = ''
+      this.userData.image = null
+      this.active = !this.active
+    },
+    toggle() {
+      this.active = false
     }
   }
 }
@@ -67,7 +121,7 @@ export default {
 <style scoped>
 .profile-wrapper {
     width: 100%;
-    height: 100vh;
+    height: 130vh;
     background: #FFFFFF;
     box-shadow: 0px 4px 20px rgba(0, 0, 0, 0.05);
     border-radius: 25px;
@@ -92,5 +146,11 @@ export default {
 }
 .pointer {
     cursor: pointer;
+}
+.img-wrapper img {
+  width: 80px;
+  height: 80px;
+  object-fit: cover;
+  border-radius: 10px;
 }
 </style>

@@ -24,7 +24,7 @@
                     </p>
                     <form>
                         <div class="form-group" v-show="showing">
-                            <div class="input-wrapper">
+                            <!-- <div class="input-wrapper">
                                     <div class="input-group d-flex justify-content-between my-5">
                                         <input type="number" onKeyPress="if(this.value.length==1) return false;">
                                         <input type="number" onKeyPress="if(this.value.length==1) return false;">
@@ -33,10 +33,13 @@
                                         <input type="number" onKeyPress="if(this.value.length==1) return false;">
                                         <input type="number" onKeyPress="if(this.value.length==1) return false;">
                                     </div>
+                            </div> -->
+                            <div class="input-wrapper">
+                                <PincodeInput v-model="code" :length="length" />
                             </div>
                         </div>
-                        <button type="submit" class="btn" @click.prevent="showing = !showing" v-show="showing">Confirm</button>
-                        <button type="submit" class="btn mt-5" @click.prevent="login" v-show="!showing" style="background:#6379F4;color:#fff">Login Now</button>
+                        <button type="submit" class="btn btn-primary" v-show="showing" @click.prevent="createPin">Confirm</button>
+                        <button type="submit" class="btn mt-5" v-show="!showing" style="background:#6379F4;color:#fff">Login Now</button>
                     </form>
             </div>
     </div>
@@ -44,18 +47,29 @@
 
 <script>
 import leftSide from './side'
+import PincodeInput from 'vue-pincode-input'
+import axios from 'axios'
 export default {
   components: {
-    leftSide
+    leftSide,
+    PincodeInput
   },
   data() {
     return {
-      showing: true
+      showing: true,
+      code: '',
+      length: 6
     }
   },
   methods: {
-    login() {
-      this.$router.push('/login')
+    createPin() {
+      axios.post(`${process.env.VUE_APP_BASE_URL}/api/v1/pin`, { pin: this.code, userId: localStorage.getItem('registerId') })
+        .then(() => {
+          this.showing = !this.showing
+          localStorage.removeItem('registerId')
+          this.$router.push('/login')
+        })
+        .catch(err => console.log(err))
     }
   }
 }
@@ -68,6 +82,14 @@ export default {
 }
 .color { color: white;}
 
+/* Vue Pin */
+div.vue-pincode-input-wrapper {
+   /* any styles you want for wrapper */
+    width: 100%;
+    height: 50px;
+    display: flex;
+    justify-content: space-between;
+}
 /* ONE */
 .one {
     background: #6379F4;
@@ -93,13 +115,6 @@ input:focus {
     margin: 60px 0px;
 }
 
-/* button {
-    width: 80%;
-    background: #DADADA;
-    box-shadow: 0px 6px 75px rgba(100, 87, 87, 0.05);
-    border-radius: 12px;
-    color: #88888F;
-} */
 /* PIN */
 .input-wrapper {
     margin: auto;
@@ -125,7 +140,6 @@ input[type=number] {
 }
 .btn {
     text-align: center;
-    background: #DADADA;
     box-shadow: 0px 6px 75px rgba(100, 87, 87, 0.05);
     border-radius: 12px;
     width: 75%;

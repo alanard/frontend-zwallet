@@ -13,17 +13,15 @@
       </div>
       <div
         class="item-content"
-        v-for="(user, index) in users"
-        :key="index"
-        @click="linkToTransfer"
+        v-for="(user, index) in users" :key="index"
       >
-        <div class="image">
-          <img :src="user.image" alt="" />
-        </div>
-        <div class="bio">
-          <div class="name">{{ user.username }}</div>
-          <div class="phone-number">{{ user.phone }}</div>
-        </div>
+      <!-- card -->
+      <CardTransfer
+        :userId="user.userId"
+        :username="user.username"
+        :image="user.image"
+        :phoneNumber="user.phoneNumber"
+        :balance="user.balance"/>
       </div>
     </div>
     <Pagination :data="pagination" />
@@ -32,14 +30,16 @@
 
 <script>
 import Pagination from '../../../../components/_base/Pagination'
-import { mapGetters, mapActions } from 'vuex'
+import CardTransfer from '../../../../components/_base/CardTransfer'
+import { mapGetters, mapActions, mapMutations } from 'vuex'
 export default {
   name: 'Transfer',
   data() {
     return {}
   },
   components: {
-    Pagination
+    Pagination,
+    CardTransfer
   },
   mounted() {
     this.getAllUser()
@@ -47,13 +47,14 @@ export default {
   computed: {
     ...mapGetters({
       users: 'get_all_user',
-      pagination: 'pagination'
+      pagination: 'pagination',
+      getReceiver: 'getReceiver'
     })
   },
   methods: {
+    ...mapMutations(['setReceiver']),
     ...mapActions(['getAllUser']),
     linkToTransfer() {
-      this.$router.push({ path: '/home/InputTransfer' })
     },
     setSearch(e) {
       // console.log(e.target.value)
@@ -128,8 +129,8 @@ export default {
   color: rgba(58, 61, 66, 0.4);
 }
 
-.transfer .item-content {
-  /* border: 1px solid black; */
+/* .transfer .item-content {
+  border: 1px solid black;
   height: 90px;
 
   display: flex;
@@ -142,7 +143,7 @@ export default {
   border-radius: 10px;
 
   cursor: pointer;
-}
+} */
 
 .transfer .item-content:hover {
   background: rgba(0, 0, 0, 0.05);
