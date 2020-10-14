@@ -142,11 +142,11 @@ export default {
         datasets: [
           {
             label: 'Amount',
-            backgroundColor: 'rgba(251, 178, 180, 0.2)',
-            borderColor: '#FBB2B4',
-            pointBackgroundColor: '#FBB2B4',
+            backgroundColor: '#6379F4',
+            borderColor: '#6379F4',
+            pointBackgroundColor: '#6379F4',
             borderWidth: 3,
-            pointBorderColor: '#FBB2B4',
+            pointBorderColor: '#6379F4',
             data: this.amount
           }
         ]
