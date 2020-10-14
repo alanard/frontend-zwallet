@@ -35,7 +35,9 @@
             <div class="money">Rp2.120.000</div>
           </div>
         </div>
-        <div class="chart"></div>
+        <div class="chart">
+          <LineChart v-if="loaded" :chartData="chartData" :options="chartOptions" />
+        </div>
       </div>
       <!-- ================= -->
       <!-- Main right -->
@@ -75,8 +77,25 @@
 
 <script>
 import { mapGetters, mapActions } from 'vuex'
+import LineChart from '../../../../components/_base/lineChart'
+import axios from 'axios'
 export default {
   name: 'Dashboard',
+  components: {
+    LineChart
+  },
+  data() {
+    return {
+      chartData: null,
+      chartOptions: {
+        responsive: true,
+        maintainAspectRatio: false
+      },
+      date: [],
+      amount: [],
+      loaded: false
+    }
+  },
   methods: {
     ...mapActions(['getTransactionById', 'get_user_login', 'getPhoneNumber']),
     linkToTransfer() {
@@ -97,6 +116,31 @@ export default {
   mounted() {
     this.getTransactionById()
     this.getPhoneNumber()
+    const setChartData = () => {
+      this.chartData = {
+        labels: this.date,
+        datasets: [
+          {
+            label: 'Amount',
+            backgroundColor: 'rgba(251, 178, 180, 0.2)',
+            borderColor: '#FBB2B4',
+            pointBackgroundColor: '#FBB2B4',
+            borderWidth: 3,
+            pointBorderColor: '#FBB2B4',
+            data: this.amount
+          }
+        ]
+      }
+    }
+    setChartData()
+  },
+  async created() {
+    const { data } = await axios.get(`${process.env.VUE_APP_BASE_URL}/api/v1/transaction/week/${localStorage.getItem('id')}`)
+    data.result.forEach(d => {
+      this.date.push(d.days)
+      this.amount.push(d.amount)
+    })
+    this.loaded = true
   }
 }
 </script>
@@ -242,7 +286,6 @@ export default {
 
 /* Chart */
 .main-left .chart {
-  border: 1px solid black;
   flex: 2;
 }
 

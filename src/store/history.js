@@ -22,7 +22,7 @@ const actions = {
     return new Promise((resolve, reject) => {
       axios.get(`${process.env.VUE_APP_BASE_URL}/api/v1/transaction/${localStorage.getItem('id')}`)
         .then((res) => {
-          console.log(res.data.result)
+          console.log('get transaction', res.data.result)
           context.commit('setTransaction', res.data.result)
           resolve(res.data.result)
         })

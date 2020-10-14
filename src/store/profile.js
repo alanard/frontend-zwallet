@@ -130,10 +130,11 @@ const actions = {
   getUserLogin(context) {
     return new Promise((resolve, reject) => {
       const id = localStorage.getItem('id')
-      axios.get('http://localhost:3000/api/v1/user/' + id)
+      // axios.get('http://localhost:3000/api/v1/user/' + id)
+      axios.get(`${process.env.VUE_APP_BASE_URL}/api/v1/user/${id}`)
         .then(res => {
-          console.log('get user login' + res.data.result)
-          context.commit('USER_LOGGED', res.data.result)
+          console.log(res.data.result[0])
+          context.commit('USER_LOGGED', res.data.result[0])
         })
     })
   },
@@ -155,7 +156,7 @@ const actions = {
       const id = localStorage.getItem('id')
       axios.get(`${process.env.VUE_APP_BASE_URL}/api/v1/phone/${id}`)
         .then(res => {
-          // console.log(res.data.result)
+          console.log(res.data.result)
           context.commit('USER_PHONES', res.data.result)
           resolve(res.data.result)
         })
@@ -172,7 +173,7 @@ const getters = {
     return state.token !== null
   },
   get_user_login(state) {
-    console.log('getters' + state.userLogin)
+    console.log('getters', state.userLogin)
     return state.userLogin
   },
   get_user_phone_number(state) {

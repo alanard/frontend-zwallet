@@ -79,13 +79,13 @@ export default {
     toChangePIN() {
       this.$router.push('/home/profile/pin')
     },
-    edit(user) {
-      console.log(user)
-      this.userData.id = user.userId
-      this.userData.username = user.username
-      this.userData.firstName = user.firstName
-      this.userData.lastName = user.lastName
-      this.userData.image = user.image
+    edit(users) {
+      console.log(users)
+      this.userData.id = users.userId
+      this.userData.username = users.username
+      this.userData.firstName = users.firstName
+      this.userData.lastName = users.lastName
+      this.userData.image = users.image
       this.active = !this.active
     },
     updateData() {
