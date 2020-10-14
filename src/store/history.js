@@ -2,7 +2,9 @@ import axios from 'axios'
 // import Router from '../router/index'
 
 const state = {
-  transaction: []
+  transaction: [],
+  income: [],
+  expense: []
 }
 
 const mutations = {
@@ -14,6 +16,12 @@ const mutations = {
   },
   setTransaction(state, payload) {
     state.transaction = payload
+  },
+  SET_INCOME(state, payload) {
+    state.income = payload
+  },
+  SET_EXPENSE(state, payload) {
+    state.expense = payload
   }
 }
 
@@ -31,12 +39,36 @@ const actions = {
           console.log(err)
         })
     })
+  },
+  incomeThisWeek(context) {
+    return new Promise((resolve, reject) => {
+      axios.get(`${process.env.VUE_APP_BASE_URL}/api/v1/transaction/income/${localStorage.getItem('id')}`)
+        .then(res => {
+          context.commit('SET_INCOME', res.data.result[0])
+        })
+        .catch(err => console.log(err))
+    })
+  },
+  expenseThisWeek(context) {
+    return new Promise((resolve, reject) => {
+      axios.get(`${process.env.VUE_APP_BASE_URL}/api/v1/transaction/expense/${localStorage.getItem('id')}`)
+        .then(res => {
+          context.commit('SET_EXPENSE', res.data.result[0])
+        })
+        .catch(err => console.log(err))
+    })
   }
 }
 
 const getters = {
   get_transaction(state) {
     return state.transaction
+  },
+  get_income(state) {
+    return state.income
+  },
+  get_expense(state) {
+    return state.expense
   }
 }
 export default {

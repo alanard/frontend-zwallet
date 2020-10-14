@@ -27,12 +27,14 @@
           <div class="item">
             <div><i class="fas fa-arrow-down"></i></div>
             <div class="title">Income</div>
-            <div class="money">Rp2.120.000</div>
+            <!-- <div class="money">Rp2.120.000</div> -->
+            <div class="money">Rp. {{setIncome}}</div>
           </div>
           <div class="item">
             <div><i class="fas fa-arrow-up"></i></div>
             <div class="title">Expense</div>
-            <div class="money">Rp2.120.000</div>
+            <!-- <div class="money">Rp2.120.000</div> -->
+            <div class="money">Rp {{setExpense}}</div>
           </div>
         </div>
         <div class="chart">
@@ -97,7 +99,7 @@ export default {
     }
   },
   methods: {
-    ...mapActions(['getTransactionById', 'get_user_login', 'getPhoneNumber']),
+    ...mapActions(['getTransactionById', 'get_user_login', 'getPhoneNumber', 'incomeThisWeek', 'expenseThisWeek']),
     linkToTransfer() {
       this.$router.push({ path: '/home/transfer' })
     },
@@ -110,12 +112,30 @@ export default {
       getTransaction: 'get_transaction',
       getTransactionByUserId: 'get_user_login',
       getUserlogin: 'get_user_login',
-      get_user_phone_number: 'get_user_phone_number'
-    })
+      get_user_phone_number: 'get_user_phone_number',
+      income: 'get_income',
+      expense: 'get_expense'
+    }),
+    setIncome() {
+      if (this.income.income === null) {
+        return 0
+      } else {
+        return this.income.income
+      }
+    },
+    setExpense() {
+      if (this.expense.expense === null) {
+        return 0
+      } else {
+        return this.expense.expense
+      }
+    }
   },
   mounted() {
     this.getTransactionById()
     this.getPhoneNumber()
+    this.incomeThisWeek()
+    this.expenseThisWeek()
     const setChartData = () => {
       this.chartData = {
         labels: this.date,
