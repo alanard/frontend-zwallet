@@ -5,15 +5,15 @@
       <!-- Navbar -->
       <div class="col-md-12 navbar">
         <div class="brand">Zwallet</div>
-        <div class="myprofile" v-for="(user, index) in users" :key="index">
+        <div class="myprofile">
           <div class="image">
             <img src="../../../assets/myprofile.png" />
           </div>
           <div class="bio">
             <div class="name">
-              {{ user.firstName }} &nbsp; {{ user.lastName }}
+              {{ users.firstName }} &nbsp; {{ users.lastName }}
             </div>
-            <div class="phoneNumber">{{ user.phoneNumber }}</div>
+            <div class="phoneNumber">{{ phone }}</div>
           </div>
           <i class="far fa-bell" @click="ModalActive"></i>
           <!-- Modal Notification -->
@@ -92,7 +92,8 @@ export default {
   },
   computed: {
     ...mapGetters({
-      users: 'get_user_login'
+      users: 'get_user_login',
+      phone: 'get_user_phone_number'
     })
   }
 }

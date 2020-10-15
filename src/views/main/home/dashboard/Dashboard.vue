@@ -5,8 +5,8 @@
     <div class="nav-dashboard">
       <div class="item-left">
         <div class="status">Balance</div>
-        <!-- <div class="saldo">Rp. {{ getUserlogin[0].balance }}</div> -->
-        <!-- <div class="phone-number">{{ getUserlogin[0].phoneNumber }}</div> -->
+        <div class="saldo">Rp. {{ setBalance }}</div>
+        <div class="phone-number">{{ get_user_phone_number }}</div>
       </div>
       <div class="item-right">
         <button class="btn btn-primary" @click="linkToTransfer">
@@ -99,7 +99,7 @@ export default {
     }
   },
   methods: {
-    ...mapActions(['getTransactionById', 'get_user_login', 'getPhoneNumber', 'incomeThisWeek', 'expenseThisWeek']),
+    ...mapActions(['getTransactionById', 'getUserLogin', 'getPhoneNumber', 'incomeThisWeek', 'expenseThisWeek']),
     linkToTransfer() {
       this.$router.push({ path: '/home/transfer' })
     },
@@ -129,6 +129,13 @@ export default {
       } else {
         return this.expense.expense
       }
+    },
+    setBalance() {
+      if (this.getUserlogin.balance === 0) {
+        return 0
+      } else {
+        return this.getUserlogin.balance
+      }
     }
   },
   mounted() {
@@ -136,6 +143,7 @@ export default {
     this.getPhoneNumber()
     this.incomeThisWeek()
     this.expenseThisWeek()
+    this.getUserLogin()
     const setChartData = () => {
       this.chartData = {
         labels: this.date,

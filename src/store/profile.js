@@ -133,9 +133,11 @@ const actions = {
       // axios.get('http://localhost:3000/api/v1/user/' + id)
       axios.get(`${process.env.VUE_APP_BASE_URL}/api/v1/user/${id}`)
         .then(res => {
-          console.log(res.data.result[0])
+          console.log('userLogin', res.data.result[0])
           context.commit('USER_LOGGED', res.data.result[0])
+          resolve(res.data.result[0])
         })
+        .catch(err => console.log(err))
     })
   },
   // Get phones number one
