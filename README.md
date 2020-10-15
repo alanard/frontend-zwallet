@@ -47,13 +47,12 @@ VUE_APP_BASE_URL=YOUR_HOST_URL
 `
 ## Screenshots
 <p align="center">
-<img src="readme_image/landingpage_navbar.PNG" width="250" height="120"> <img src="readme_image/landingpage_about_us.PNG" width="250" height="120">
-<img src="readme_image/Landingpage_map_location.PNG" width="250" height="120"> <img src="readme_image/landingpage_ekstra_ordinary_menus.PNG" width="250" height="120">
-<img src="readme_image/landingpage_most_popular.PNG" width="250" height="120"> <img src="readme_image/landingpage_cafe_location.PNG" width="250" height="120">
-<img src="readme_image/landingpage_music.PNG" width="250" height="120"> <img src="readme_image/home/Register.PNG" width="250" height="120"> 
-<img src="readme_image/home/login.PNG" width="250" height="140"> <img src="readme_image/home/home.PNG" width="250" height="120"> 
-<img src="readme_image/home/home-add-cart.PNG" width="250" height="120"> <img src="readme_image/home/Products.PNG" width="250" height="120"> 
-<img src="readme_image/home/products-add.PNG" width="250" height="120"> <img src="readme_image/home/products-update.PNG" width="250" height="120">
+<img src="readme-image/landingpage.PNG" width="250" height="120"> <img src="readme-image/login.PNG" width="250" height="120">
+<img src="readme-image/register.PNG" width="250" height="120"> <img src="readme-image/home.PNG" width="250" height="120">
+<img src="readme-image/profile.PNG" width="250" height="120"> <img src="readme-image/updateuser.PNG" width="250" height="120">
+<img src="readme-image/transfer.PNG" width="250" height="120"> <img src="readme-image/input pin.PNG" width="250" height="120"> 
+<img src="readme-image/history transaction.PNG" width="250" height="140"> <img src="readme-image/create pin.PNG" width="250" height="120"> 
+<img src="readme-image/chart.PNG" width="250" height="120"> <img src="readme-image/home/Products.PNG" width="250" height="120"> 
 </p>
 
 ### Related Project (Backend)
