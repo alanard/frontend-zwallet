@@ -7,7 +7,7 @@
         <div class="brand">Zwallet</div>
         <div class="myprofile">
           <div class="image">
-            <img src="../../../assets/myprofile.png" />
+            <img :src="users.image" />
           </div>
           <div class="bio">
             <div class="name">
