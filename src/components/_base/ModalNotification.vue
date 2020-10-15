@@ -1,55 +1,65 @@
 <template>
   <div class="modal-notification">
-    <div class="title">Today</div>
-    <div class="income">
-      <div class="image">
-        <i class="fas fa-arrow-down"></i>
-      </div>
-      <div class="content">
-        <div class="transfer-to">Transfered from Joshua Lee</div>
-        <div class="count-money">Rp220.000</div>
-      </div>
-    </div>
-    <div class="income">
-      <div class="image">
-        <i class="fas fa-arrow-up"></i>
-      </div>
-      <div class="content">
-        <div class="transfer-to">Netflix subscription</div>
-        <div class="count-money">Rp149.000</div>
+    <div class="title">Income</div>
+    <div class="income1">
+      <div class="income" v-for="history in getTransactionIn" :key="history.transactionId">
+        <div class="image">
+          <i class="fas fa-arrow-down"></i>
+        </div>
+        <div class="content">
+          <div class="transfer-to">Transfered from {{history.senderName}}</div>
+          <div class="count-money">Rp {{history.amount}}</div>
+        </div>
       </div>
     </div>
     <!-- ============================================================================ -->
     <!-- this week -->
-    <div class="title">This Week</div>
-    <div class="income">
-      <div class="image">
-        <i class="fas fa-arrow-up"></i>
-      </div>
-      <div class="content">
-        <div class="transfer-to">Transfer to Jessica Lee</div>
-        <div class="count-money">Rp100.000</div>
-      </div>
-    </div>
-    <div class="income">
-      <div class="image">
-        <i class="fas fa-arrow-down"></i>
-      </div>
-      <div class="content">
-        <div class="transfer-to">Top up from BNI E-Banking</div>
-        <div class="count-money">Rp300.000</div>
+    <div class="title">Expense</div>
+    <div class="expense">
+      <div class="income" v-for="(history, index) in getTransactionOut" :key="index">
+        <div class="image">
+          <i class="fas fa-arrow-up"></i>
+        </div>
+        <div class="content">
+          <div class="transfer-to">Transfer to {{history.receiverName}}</div>
+          <div class="count-money">Rp {{history.amount}}</div>
+        </div>
       </div>
     </div>
   </div>
 </template>
 
 <script>
+import { mapActions, mapGetters } from 'vuex'
 export default {
-  name: 'ModalNotification'
+  name: 'ModalNotification',
+  computed: {
+    ...mapGetters({
+      getTransactionIn: 'get_transaction_in',
+      getTransactionOut: 'get_transaction_out'
+    })
+  },
+  methods: {
+    ...mapActions(['getTransactionInById', 'getTransactionOutById'])
+  },
+  mounted() {
+    this.getTransactionInById()
+    this.getTransactionOutById()
+  }
 }
 </script>
 
 <style scoped>
+.income1 {
+  overflow: auto;
+  width: 100%;
+  height: 250px;
+}
+.expense {
+  overflow: auto;
+  width: 100%;
+  height: 250px;
+}
 .modal-notification {
   /* border: 1px solid black; */
   height: inherit;

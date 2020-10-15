@@ -82,4 +82,11 @@ export default {
 .info-wrapper {
   flex-grow: 2;
 }
+.img-wrapper img {
+  /* height: 70px; */
+  height: 70%;
+  width: 70px;
+  border-radius: 10px;
+  object-fit: cover;
+}
 </style>
