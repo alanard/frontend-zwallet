@@ -1,6 +1,6 @@
 # Z-Wallet Website
 <p align="center">
-<img align="center" src="readme_image/kingscafe_logos.PNG" width="400" height="250"> <img align="center" src="readme_image/vuejs-300x300.png" width="230" height="180">
+<img align="center" src="image-readme/zwallet-logo.PNG" width="300" height="450"> <img align="center" src="image-readme/vuejs-300x300.png" width="230" height="180">
 </p>
 
 ## Table of Contents
