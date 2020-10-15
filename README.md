@@ -1,6 +1,6 @@
 # Z-Wallet Website
 <p align="center">
-<img align="center" src="image-readme/zwallet-logo.PNG" width="300" height="450"> <img align="center" src="image-readme/vuejs-300x300.png" width="230" height="180">
+<img align="center" src="image-readme/zwallet-logo.PNG" width="360" height="430"> <img align="center" src="image-readme/vuejs-300x300.png" width="260" height="210">
 </p>
 
 ## Table of Contents
