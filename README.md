@@ -1,77 +1,61 @@
-# Zwallet
+# Z-Wallet Website
+<p align="center">
+<img align="center" src="readme_image/kingscafe_logos.PNG" width="400" height="250"> <img align="center" src="readme_image/vuejs-300x300.png" width="230" height="180">
+</p>
 
-<!-- TABLE OF CONTENTS -->
 ## Table of Contents
+- Introduction
+- Features
+- Requirements
+- Usage
+- Create Environment Variable
+- Screenshots
+- Related Project
 
-* [About the Project](#about-the-project)
-  * [Built With](#built-with)
-* [Getting Started](#getting-started)
-  * [Installation](#installation)
-* [Screenshots](#screenshots)
-* [Related Project](#related-project)
-* [Contact](#contact)
+### Introduction
+<b>z wallet</b> is an online website that operates in the fintech sector, which provides an easier and faster transfer feature to fellow users. The hope is that the z wallet can expand fintech in Indonesia, and make it easier to transfer money to one another
+### Features
+- Users/Customers who are not logged in can only view landing page
+- Users/Customers must sign up and sign in to send money to each other and see their profiles
+- Users/Customers can add more than one cellphone number, and choose which one to be the primary phone number
+- And others
 
-<!-- ABOUT THE PROJECT -->
-## About The Project
+### Requirements
+- [npm](https://www.npmjs.com/package/module)
+- [vue.js](https://www.vuejs.org)
+- [vue.js-cli](https://cli.vuejs.org)
+- [backend-Zwallet](https://github.com/Friemorn/BackEnd-PaymentApp-ZWallet)
 
+### Usage for development
+Open your terminal or command prompt
+Type git clone https://github.com/alanard/frontend-zwallet/
+Open the folder and type npm install for install dependencies
+Create Environment Variable here
+Before run this, you must run backend first
+Type npm run serve if you use npm, or yarn serve if you use yarn, for run this app. Make sure your device is connected with debugging mode.
 
-Zwallet is a application too help people about payment
-
-### Built With
-
-* [VueJS](http://vuejs.org/)
-
-<!-- GETTING STARTED -->
-## Getting Started
-
-### Installation
-
-1. Clone the repo
-```sh
-git clone https://github.com/alanard/frontend-zwallet.git
-```
-2. Install NPM packages
-```sh
-npm install
-```
-3. Add .env file at root folder project, and add following
-```sh
-VUE_APP_ENDPOINT = [Backend API]
-VUE_APP_SECRET_KEY = your_secret_key
-```
-4. Compiles and hot-reloads for development
-```sh
-npm run serve
-```
-5. Lints and fixes files
-```
-npm run lint
-```
-6. Compiles and minifies for production
-```
-npm run build
-```
-
-
-<!-- ROADMAP -->
+### Create Environment Variable
+`
+$ cp .env.example .env
+`
+`
+$ nano .env
+`
+### Set API KEY
+`
+VUE_APP_BASE_URL=YOUR_HOST_URL
+`
 ## Screenshots
+<p align="center">
+<img src="readme_image/landingpage_navbar.PNG" width="250" height="120"> <img src="readme_image/landingpage_about_us.PNG" width="250" height="120">
+<img src="readme_image/Landingpage_map_location.PNG" width="250" height="120"> <img src="readme_image/landingpage_ekstra_ordinary_menus.PNG" width="250" height="120">
+<img src="readme_image/landingpage_most_popular.PNG" width="250" height="120"> <img src="readme_image/landingpage_cafe_location.PNG" width="250" height="120">
+<img src="readme_image/landingpage_music.PNG" width="250" height="120"> <img src="readme_image/home/Register.PNG" width="250" height="120"> 
+<img src="readme_image/home/login.PNG" width="250" height="140"> <img src="readme_image/home/home.PNG" width="250" height="120"> 
+<img src="readme_image/home/home-add-cart.PNG" width="250" height="120"> <img src="readme_image/home/Products.PNG" width="250" height="120"> 
+<img src="readme_image/home/products-add.PNG" width="250" height="120"> <img src="readme_image/home/products-update.PNG" width="250" height="120">
+</p>
 
-<!-- <p align='center'>
-  <span>
-      <image width="200" src='./screenshots/landing.png' />
-      <image width="200" src='./screenshots/login.png' />
-      <image width="200" src='./screenshots/register.png' />
-      <image width="200" src='./screenshots/home.png' />
-      <image width="200" src='./screenshots/cart.png' />
-      <image width="200" src='./screenshots/chart.png' />
-      <image width="200" src='./screenshots/order.png' />
-      <image width="200" src='./screenshots/product.png' />
-      <image width="200" src='./screenshots/user.png' />
-      <image width="200" src='./screenshots/checkout.png' />
-  </span>
- </p> -->
- 
-## Related Project
-<!-- * [`ark-backend`](https://github.com/erlanggajatikusuma/ark-backend) -->
+### Related Project (Backend)
 
-
+[backend-Z-Wallet](https://github.com/Friemorn/BackEnd-PaymentApp-ZWallet)
