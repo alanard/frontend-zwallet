@@ -47,8 +47,16 @@
 </template>
 
 <script>
+import { mapActions } from 'vuex'
 export default {
-  name: 'Faq'
+  name: 'Faq',
+  methods: {
+    ...mapActions(['getPhoneNumber', 'getUserLogin'])
+  },
+  mounted() {
+    this.getPhoneNumber()
+    this.getUserLogin()
+  }
 }
 </script>
 

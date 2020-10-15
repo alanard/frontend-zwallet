@@ -27,6 +27,7 @@
 import PincodeInput from 'vue-pincode-input'
 import axios from 'axios'
 import mixins from '../../components/mixins/swal'
+import { mapActions } from 'vuex'
 export default {
   components: {
     PincodeInput
@@ -39,6 +40,7 @@ export default {
     }
   },
   methods: {
+    ...mapActions(['getPhoneNumber', 'getUserLogin']),
     changePin() {
       const id = localStorage.getItem('id')
       axios.patch(`${process.env.VUE_APP_BASE_URL}/api/v1/pin/${id}`, { pin: this.code })
@@ -49,6 +51,10 @@ export default {
         })
         .catch(err => console.log(err))
     }
+  },
+  mounted() {
+    this.getPhoneNumber()
+    this.getUserLogin()
   }
 }
 </script>

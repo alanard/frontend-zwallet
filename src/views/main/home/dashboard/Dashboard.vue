@@ -48,28 +48,46 @@
           <div class="title">Transaction History</div>
           <div class="see-all" @click="linkHistory">See all</div>
         </div>
-        <div
-          class="transaction-history"
-          v-for="(history, index) in getTransaction"
-          :key="index"
-        >
-          <div class="people">
-            <img :src="history.image" alt="" />
-            <div class="bio">
-              <div
-                class="name"
-                v-if="getTransactionByUserId === history.senderid"
-              >
-                {{ history.receiverName }}
+        <h5>Transaction In</h5>
+        <div class="transaction-wrapper">
+          <div
+            class="transaction-history"
+            v-for="history in getTransactionIn"
+            :key="history.transactionId"
+          >
+            <div class="people">
+              <img :src="history.image" alt="" />
+              <div class="bio">
+                <div class="name">
+                  {{ history.senderName }}
+                </div>
+                <div class="method">Transfer</div>
               </div>
-              <div class="name" v-else>
-                {{ history.senderName }}
-              </div>
-              <div class="method">Transfer</div>
+            </div>
+            <div class="total-method">
+              <div class="method">{{ history.amount }}</div>
             </div>
           </div>
-          <div class="total-method">
-            <div class="method">{{ history.amount }}</div>
+        </div>
+        <h5>Transaction Out</h5>
+        <div class="transaction-wrapper">
+          <div
+            class="transaction-history"
+            v-for="(history, index) in getTransactionOut"
+            :key="index"
+          >
+            <div class="people">
+              <img :src="history.image" alt="" />
+              <div class="bio">
+                <div class="name">
+                  {{ history.receiverName }}
+                </div>
+                <div class="method">Transfer</div>
+              </div>
+            </div>
+            <div class="total-method">
+              <div class="out">{{ history.amount }}</div>
+            </div>
           </div>
         </div>
       </div>
@@ -99,7 +117,7 @@ export default {
     }
   },
   methods: {
-    ...mapActions(['getTransactionById', 'getUserLogin', 'getPhoneNumber', 'incomeThisWeek', 'expenseThisWeek']),
+    ...mapActions(['getTransactionInById', 'getTransactionOutById', 'getUserLogin', 'getPhoneNumber', 'incomeThisWeek', 'expenseThisWeek']),
     linkToTransfer() {
       this.$router.push({ path: '/home/transfer' })
     },
@@ -109,7 +127,8 @@ export default {
   },
   computed: {
     ...mapGetters({
-      getTransaction: 'get_transaction',
+      getTransactionIn: 'get_transaction_in',
+      getTransactionOut: 'get_transaction_out',
       getTransactionByUserId: 'get_user_login',
       getUserlogin: 'get_user_login',
       get_user_phone_number: 'get_user_phone_number',
@@ -139,7 +158,8 @@ export default {
     }
   },
   mounted() {
-    this.getTransactionById()
+    this.getTransactionInById()
+    this.getTransactionOutById()
     this.getPhoneNumber()
     this.incomeThisWeek()
     this.expenseThisWeek()
@@ -175,6 +195,15 @@ export default {
 </script>
 
 <style scoped>
+.transaction-wrapper {
+  width: 100%;
+  height: 250px;
+  overflow: auto;
+}
+
+.total-method .out {
+  color: red;
+}
 /* .dashboard {
   border: 1px solid black;
 } */
@@ -326,7 +355,7 @@ export default {
   background: #ffffff;
   box-shadow: 0px 4px 20px rgba(0, 0, 0, 0.05);
   border-radius: 25px;
-
+  padding: 40px;
   height: 100vh;
 }
 

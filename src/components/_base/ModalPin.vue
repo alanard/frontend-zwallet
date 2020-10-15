@@ -40,6 +40,7 @@ export default {
       length: 6
     }
   },
+  props: ['send', 'close-modal'],
   methods: {
     getPin() {
 
@@ -61,7 +62,8 @@ export default {
               text: 'Successfully!'
             })
             console.log('success')
-            this.$router.push({ path: 'transfersuccess' })
+            this.$emit('send')
+            this.$emit('close-modal')
           } else {
             Swal.fire({
               icon: 'error',

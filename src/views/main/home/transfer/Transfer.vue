@@ -43,6 +43,8 @@ export default {
   },
   mounted() {
     this.getAllUser()
+    this.getPhoneNumber()
+    this.getUserLogin()
   },
   computed: {
     ...mapGetters({
@@ -53,7 +55,7 @@ export default {
   },
   methods: {
     ...mapMutations(['setReceiver']),
-    ...mapActions(['getAllUser']),
+    ...mapActions(['getAllUser', 'getPhoneNumber', 'getUserLogin']),
     linkToTransfer() {
     },
     setSearch(e) {

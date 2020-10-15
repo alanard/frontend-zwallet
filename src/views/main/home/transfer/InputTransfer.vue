@@ -26,14 +26,14 @@
         Continue
       </div>
     </div>
-    <ModalPin v-show="isShow"/>
+    <ModalPin @send="Transfer" @close-modal="showModalPin" v-show="isShow"/>
   </div>
 </template>
 
 <script>
 import axios from 'axios'
 import ModalPin from '../../../../components/_base/ModalPin'
-import { mapGetters } from 'vuex'
+import { mapActions, mapGetters } from 'vuex'
 export default {
   name: 'InputTransfer',
   data() {
@@ -47,6 +47,7 @@ export default {
     ModalPin
   },
   methods: {
+    ...mapActions(['getUserLogin']),
     showModalPin() {
       this.isShow = !this.isShow
     },
@@ -61,9 +62,9 @@ export default {
     },
     TransactionOut() {
       axios.post(`${process.env.VUE_APP_BASE_URL}/api/v1/transaction`, {
-        userId: this.get_user_login[0].userId,
-        senderId: this.get_user_login[0].userId,
-        senderName: this.get_user_login[0].username,
+        userId: this.get_user_login.userId,
+        senderId: this.get_user_login.userId,
+        senderName: this.get_user_login.username,
         receiverId: this.getReceiver[0].userId,
         receiverName: this.getReceiver[0].username,
         amount: this.amount,
@@ -71,7 +72,7 @@ export default {
         notes: this.notes
       })
         .then((res) => {
-          console.log(res)
+          console.log(res.data.result)
         }).catch((err) => {
           console.log(err)
         })
@@ -79,8 +80,8 @@ export default {
     TransactionIn() {
       axios.post(`${process.env.VUE_APP_BASE_URL}/api/v1/transaction`, {
         userId: this.getReceiver[0].userId,
-        senderId: this.get_user_login[0].userId,
-        senderName: this.get_user_login[0].username,
+        senderId: this.get_user_login.userId,
+        senderName: this.get_user_login.username,
         receiverId: this.getReceiver[0].userId,
         receiverName: this.getReceiver[0].username,
         amount: this.amount,
@@ -94,7 +95,7 @@ export default {
         })
     },
     balanceSender() {
-      return this.get_user_login[0].balance - this.amount
+      return this.get_user_login.balance - this.amount
     },
     balanceReceiver() {
       const balanceReceiver = parseInt(this.getReceiver[0].balance) + parseInt(this.amount)
@@ -107,13 +108,16 @@ export default {
       })
     },
     balanceOut() {
-      axios.patch(`${process.env.VUE_APP_BASE_URL}/api/v1/user/balance/${this.get_user_login[0].userId}`, {
+      axios.patch(`${process.env.VUE_APP_BASE_URL}/api/v1/user/balance/${this.get_user_login.userId}`, {
         balance: this.balanceSender()
       })
     }
   },
   computed: {
     ...mapGetters(['getReceiver', 'get_user_login'])
+  },
+  mounted() {
+    this.getUserLogin()
   }
 }
 </script>

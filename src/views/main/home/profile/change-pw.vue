@@ -95,6 +95,7 @@ export default {
   },
   mounted() {
     this.getUserLogin()
+    this.getPhoneNumber()
   },
   computed: {
     ...mapGetters({
@@ -102,7 +103,7 @@ export default {
     })
   },
   methods: {
-    ...mapActions(['getUserLogin']),
+    ...mapActions(['getUserLogin', 'getPhoneNumber']),
     show() {
       this.type = this.type === 'password' ? 'text' : 'password'
       this.display = !this.display

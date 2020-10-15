@@ -2,7 +2,8 @@ import axios from 'axios'
 // import Router from '../router/index'
 
 const state = {
-  transaction: [],
+  transactionIn: [],
+  transactionOut: [],
   income: [],
   expense: []
 }
@@ -14,8 +15,11 @@ const mutations = {
   setPagination(state, payload) {
     state.pagination = payload
   },
-  setTransaction(state, payload) {
-    state.transaction = payload
+  setTransactionIn(state, payload) {
+    state.transactionIn = payload
+  },
+  setTransactionOut(state, payload) {
+    state.transactionOut = payload
   },
   SET_INCOME(state, payload) {
     state.income = payload
@@ -26,12 +30,26 @@ const mutations = {
 }
 
 const actions = {
-  getTransactionById(context, payload) {
+  getTransactionInById(context) {
     return new Promise((resolve, reject) => {
-      axios.get(`${process.env.VUE_APP_BASE_URL}/api/v1/transaction/${localStorage.getItem('id')}`)
+      axios.get(`${process.env.VUE_APP_BASE_URL}/api/v1/transaction/in/${localStorage.getItem('id')}`)
         .then((res) => {
           console.log('get transaction', res.data.result)
-          context.commit('setTransaction', res.data.result)
+          context.commit('setTransactionIn', res.data.result)
+          resolve(res.data.result)
+        })
+        .catch((err) => {
+          reject(err)
+          console.log(err)
+        })
+    })
+  },
+  getTransactionOutById(context) {
+    return new Promise((resolve, reject) => {
+      axios.get(`${process.env.VUE_APP_BASE_URL}/api/v1/transaction/out/${localStorage.getItem('id')}`)
+        .then((res) => {
+          console.log('get transaction', res.data.result)
+          context.commit('setTransactionOut', res.data.result)
           resolve(res.data.result)
         })
         .catch((err) => {
@@ -61,8 +79,11 @@ const actions = {
 }
 
 const getters = {
-  get_transaction(state) {
-    return state.transaction
+  get_transaction_in(state) {
+    return state.transactionIn
+  },
+  get_transaction_out(state) {
+    return state.transactionOut
   },
   get_income(state) {
     return state.income

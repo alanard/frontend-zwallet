@@ -9,7 +9,8 @@
     <div class="item-body">
       <div class="detail-body">
         <div class="title-body">Amount</div>
-        <div class="total">Rp100.000</div>
+        <!-- <div class="total">Rp100.000</div> -->
+        <div class="total">Rp {{amount.balance}}</div>
       </div>
     </div>
     <div class="item-body">
@@ -56,12 +57,23 @@
 </template>
 
 <script>
+import { mapGetters, mapActions } from 'vuex'
 export default {
   name: 'TransferSuccess',
   methods: {
+    ...mapActions(['getUserLogin']),
     LinkToDashboard() {
       this.$router.push({ path: '/home' })
     }
+  },
+  computed: {
+    ...mapGetters({
+      amount: 'get_user_login',
+      get_user_phone_number: 'get_user_phone_number'
+    })
+  },
+  mounted() {
+    this.getUserLogin()
   }
 }
 </script>

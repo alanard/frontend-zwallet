@@ -62,14 +62,16 @@ export default {
   },
   mounted() {
     this.getUserLogin()
+    this.getPhoneNumber()
   },
   computed: {
     ...mapGetters({
-      users: 'get_user_login'
+      users: 'get_user_login',
+      get_user_phone_number: 'get_user_phone_number'
     })
   },
   methods: {
-    ...mapActions(['logout', 'getUserLogin', 'updateUser']),
+    ...mapActions(['logout', 'getUserLogin', 'updateUser', 'getPhoneNumber']),
     toPersonal() {
       this.$router.push('/home/profile/personal')
     },

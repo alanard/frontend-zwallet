@@ -8,12 +8,12 @@
       <div class="card-body">
         <div
           class="transaction d-flex"
-          v-for="(history, index) in getTransaction"
+          v-for="(history, index) in transactionIn"
           :key="index"
            v-show="history.receiverId !== getUserId.userId"
         >
           <div class="img-wrapper">
-            <img src="../../../../assets/User/user1.png" />
+            <img :src="history.image" />
           </div>
           <div class="info-wrapper mx-3">
             <h6>{{ history.senderName }}</h6>
@@ -29,11 +29,11 @@
       <div class="card-body">
         <div
           class="transaction d-flex"
-          v-for="(history, index) in getTransaction"
+          v-for="(history, index) in transactionOut"
           :key="index"
         >
           <div class="img-wrapper">
-            <img src="../../../../assets/User/user1.png" />
+            <img :src="history.image" />
           </div>
           <div class="info-wrapper mx-3">
             <h6>{{ history.receiverName }}</h6>
@@ -49,12 +49,22 @@
 </template>
 
 <script>
-import { mapGetters } from 'vuex'
+import { mapGetters, mapActions } from 'vuex'
 export default {
   name: 'History',
+  methods: {
+    ...mapActions(['getTransactionInById', 'getTransactionOutById', 'getUserLogin', 'getPhoneNumber'])
+  },
+  mounted() {
+    this.getTransactionInById()
+    this.getTransactionOutById()
+    this.getUserLogin()
+    this.getPhoneNumber()
+  },
   computed: {
     ...mapGetters({
-      getTransaction: 'get_transaction',
+      transactionIn: 'get_transaction_in',
+      transactionOut: 'get_transaction_out',
       getUserId: 'get_user_login'
     })
   }
@@ -64,7 +74,7 @@ export default {
 <style scoped>
 .container {
   width: 100%;
-  height: 100vh;
+  height: 130vh;
   background: #ffffff;
   box-shadow: 0px 4px 20px rgba(0, 0, 0, 0.05);
   border-radius: 25px;
