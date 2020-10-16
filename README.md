@@ -47,12 +47,12 @@ VUE_APP_BASE_URL=YOUR_HOST_URL
 `
 ## Screenshots
 <p align="center">
-<img src="image-readme/landingpage.PNG" width="250" height="120"> <img src="image-readme/login.PNG" width="250" height="120">
-<img src="image-readme/register.PNG" width="250" height="120"> <img src="image-readme/home.PNG" width="250" height="120">
-<img src="image-readme/profile.PNG" width="250" height="120"> <img src="image-readme/updateuser.PNG" width="250" height="120">
-<img src="image-readme/transfer.PNG" width="250" height="120"> <img src="image-readme/input pin.PNG" width="250" height="120"> 
-<img src="image-readme/history transaction.PNG" width="250" height="140"> <img src="image-readme/create pin.PNG" width="250" height="120"> 
-<img src="image-readme/chart.PNG" width="250" height="120"> <img src="image-readme/home/Products.PNG" width="250" height="120"> 
+<img src="image-readme/landingpage.PNG" width="260" height="130"> <img src="image-readme/login.PNG" width="260" height="130">
+<img src="image-readme/register.PNG" width="260" height="130"> <img src="image-readme/home.PNG" width="260" height="130">
+<img src="image-readme/profile.PNG" width="260" height="130"> <img src="image-readme/updateuser.PNG" width="260" height="130">
+<img src="image-readme/transfer.PNG" width="260" height="130"> <img src="image-readme/input pin.PNG" width="260" height="130"> 
+<img src="image-readme/history transaction.PNG" width="260" height="130"> <img src="image-readme/create pin.PNG" width="260" height="130"> 
+<img src="image-readme/chart.PNG" width="260" height="130"> <img src="image-readme/topup.PNG" width="260" height="130"> 
 </p>
 
 ### Related Project (Backend)
